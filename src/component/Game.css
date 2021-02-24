@@ -1,0 +1,7 @@
+/* import backgroundImage from "../public/green.jpg" */
+
+#background {
+    background-image: url(https://wallpaperaccess.com/islamic-green);
+    border: 10px saddlebrown;
+    border-radius: 5px;
+}

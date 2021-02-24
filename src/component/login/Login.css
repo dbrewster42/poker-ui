@@ -1,0 +1,67 @@
+#header {
+    color: red;
+    font-size: 300%;
+}
+#parent {
+    /* background-color: rgb(60, 73, 87); */
+    background-color: rgb(38, 48, 58);
+    color: #05F100;
+    font-family: 'Share Tech Mono', monospace;
+}
+.buttons {
+    width: 12%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    margin: 2%;
+    margin-top: 0%;
+}
+#start {
+    width: 15%;
+    height: 60px;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    margin: 2%;
+    margin-top: 0%;
+}
+#oversize {
+    font-size: 200%;
+}
+.big {
+    font-size: 300%;
+}
+p, li {
+    width: 75%;
+    margin-left: 12.5%;
+    text-align: left;
+}
+h2, h3, h4 {
+    color: rgb(94, 94, 173);
+    text-decoration: underline;
+}
+/* Form */
+.fields {
+    width: 60%;
+    height: 30px;
+}
+
+.cancel {
+    border-radius: 50%;
+    background-color: red;
+    margin: 2%;
+    margin-left: 88%;
+}
+.submit {
+    background-color: black;
+    color: white;
+    margin: 2%;
+}
+
+#form {
+    background-color: rgb(60, 73, 87);
+    border: 2px solid black;
+    width: 30%;
+    margin-left: 35%;
+}
