@@ -1,0 +1,41 @@
+/* import backgroundImage from "../public/green.jpg" */
+#header {
+    color: red;
+    font-size: 300%;
+}
+#background {
+    /* background-color: rgb(60, 73, 87); */
+    background-color: rgb(38, 48, 58);
+    color: #05F100;
+    font-family: 'Share Tech Mono', monospace;
+    width: 100%;
+    height: 1000px;
+    padding: 10px;
+}
+#table {
+    /* background-image: url("../../images/green.jpg"); */
+    background-color: seagreen;
+    border: 10px solid saddlebrown;
+    border-radius: 5px;
+    width: 72%;
+    height: 500px;
+    margin-left: 14%;
+    margin-top: 7%;
+}
+#start {
+    width: 18%;
+    height: 60px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: red;
+    color: white;
+    margin: 2%;
+    margin-top: 15%;
+    animation: startButton;
+    font-weight: 700;
+    font-size: 120%;
+}
+@keyframes startButton {
+    from {background-color: seagreen;}
+    to {background-color: red;}
+}

@@ -7,6 +7,7 @@
     background-color: rgb(38, 48, 58);
     color: #05F100;
     font-family: 'Share Tech Mono', monospace;
+    padding: 10px;
 }
 .buttons {
     width: 12%;
@@ -18,13 +19,21 @@
     margin-top: 0%;
 }
 #start {
-    width: 15%;
+    width: 18%;
     height: 60px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 15px;
     background-color: red;
     color: white;
     margin: 2%;
     margin-top: 0%;
+    animation: startButton;
+    font-weight: 700;
+    font-size: 120%;
+}
+@keyframes startButton {
+    from {background-color:  rgb(38, 48, 58);}
+    to {background-color: red;}
 }
 #oversize {
     font-size: 200%;

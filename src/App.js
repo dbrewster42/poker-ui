@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from "./component/login/Login";
-import Game from "./component/Game";
+import Game from "./component/game/Game";
 
 function App() {
   return (

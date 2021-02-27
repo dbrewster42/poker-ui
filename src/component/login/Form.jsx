@@ -6,20 +6,22 @@ import Service from "../../service/Service"
 const Form = props => {
     const [name, setName] = useState("Enter Your Unique Username");
     const [buyIn, setBuyIn] = useState(100);
-    
-    const headers =    {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        }
-      }
 
-    const createPlayer = async () => {
+    const createPlayer = async e => {
+        e.preventDefault();
         console.log("creating player", name, buyIn)
         let body = {};
-        body[name] = name;
-        body[buyIn] = buyIn;
-        const data = await Service.createNewPlayer(body, headers);
+        body["username"] = name;
+        body["money"] = buyIn;
+        try {
+            const data = await Service.createNewPlayer(body);
+            console.log(data.data)
+            console.log(data.data.body)
+        } catch (err) {
+            console.log(err.response.data)
+            props.setErrorMessage(err.response.data.errMessage)
+        }
+
         //success or failure. boolean or string?
         props.setAuth(true)
     }
@@ -32,13 +34,13 @@ const Form = props => {
 
     return ( 
         <div id="form">
-            <button class="cancel" onClick={props.toggleForm}>X</button>
+            <button className="cancel" onClick={props.toggleForm}>X</button>
             <form onSubmit={createPlayer}>
-                <label for="name">Username </label>
-                <input class="fields" type="text" name="name" onChange={changeName} value={name} /><br />
-                <label for="buyin">Buy In $ </label>
-                <input class="fields" type="number" name="buyin" onChange={changeBuyIn} value={buyIn} /><br />
-                <input class="submit" type="submit" value="Submit" />
+                <label htmlFor="name">Username </label>
+                <input className="fields" type="text" name="name" onChange={changeName} value={name} /><br />
+                <label htmlFor="buyin">Buy In $ </label>
+                <input className="fields" type="number" name="buyin" onChange={changeBuyIn} value={buyIn} /><br />
+                <input className="submit" type="submit" value="Submit" />
             </form>
         </div>
      );
