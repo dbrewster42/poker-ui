@@ -1,27 +1,48 @@
 import "./Game.css"
+import Service from "../../service/Service"
+import { useEffect, useState } from "react";
+import SettingsForm from "./SettingsForm"
 
 function importAll(r) {
     let images = {};
     r.keys().forEach((item) => {        
         images[item.replace("./", "")] = r(item);
     });
-    // console.log(images);
+    console.log(images);
     return images;
   }
 
-const Game = () => {
-
+const Game = props => {
+    console.log(props)
+    let [hasStarted, setHasStarted] = useState(false);
+    const username = props.location.state.username;
+    
     const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
 
-    const deal = () => {
+    const deal = async () => {
         console.log("hi")
+        const data = await Service.deal();
+        console.log(data)
     }
+
+    const startGame = async () => {
+        const body = { username}
+        const data = await Service.start(body);
+        console.log(data)
+    }
+
+    // useEffect(() => {
+
+    // }, [])
 
     return ( 
         <div id="background">
              <h1 id="header">Devon's Texas Hold 'Em</h1> 
             <div id="table">
-                <button id="start" onClick={deal}>Deal</button>  
+                {hasStarted ? <SettingsForm startGame={startGame} /> :
+                    <button id="start" onClick={deal}>Deal</button>
+                }
+                  
             </div>
                
             {/* {images.map((image, i) => {

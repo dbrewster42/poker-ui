@@ -15,8 +15,8 @@
 #table {
     /* background-image: url("../../images/green.jpg"); */
     background-color: seagreen;
-    border: 10px solid saddlebrown;
-    border-radius: 5px;
+    border: 15px solid saddlebrown;
+    border-radius: 10px;
     width: 72%;
     height: 500px;
     margin-left: 14%;

@@ -14,5 +14,11 @@ class Service {
         console.log(body, "--------", headers)
         return axios.post(`${url}/login`, body, headers)
     }
+    start(body){
+        return axios.post(`${url}/start`, body, headers)
+    }
+    deal(id){
+        return axios.post(`${url}/${id}`, headers)
+    }
 }
 export default new Service();
