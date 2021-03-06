@@ -15,22 +15,27 @@ function importAll(r) {
 const Game = props => {
     console.log(props)
     let [hasStarted, setHasStarted] = useState(false);
+    let [id, setId] = useState(0);
+    // let [body, setBody] = useState({});
     const username = props.location.state.username;
+    console.log(username)
     
     const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
 
-    const deal = async () => {
-        console.log("hi")
-        const data = await Service.deal();
-        console.log(data)
-    }
-
-    const startGame = async () => {
-        const body = { username}
+    const startGame = async e => {
+        e.preventDefault();
+        let body = { username }
         const data = await Service.start(body);
         console.log(data)
     }
 
+    const deal = async (e) => {
+        e.preventDefault();
+        console.log("hi")
+        let body = { username }
+        const data = await Service.deal(id, body);
+        console.log(data)
+    }
     // useEffect(() => {
 
     // }, [])
@@ -39,8 +44,8 @@ const Game = props => {
         <div id="background">
              <h1 id="header">Devon's Texas Hold 'Em</h1> 
             <div id="table">
-                {hasStarted ? <SettingsForm startGame={startGame} /> :
-                    <button id="start" onClick={deal}>Deal</button>
+                {hasStarted ? <button id="start" onClick={deal}>Deal</button> :
+                    <SettingsForm startGame={startGame} username={username} />
                 }
                   
             </div>

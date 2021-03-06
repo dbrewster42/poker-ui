@@ -3,21 +3,21 @@ import "./Login.css";
 const Instructions = () => {
     return ( 
         <div>
-            <h1>Instructions</h1>
-            <p>  ***  ***  Copied from https://bicyclecards.com/how-to-play/texas-holdem-poker/ *** ***</p>
+            <h1 className="subheaders">Instructions</h1>
+            {/* <p>  ***  ***  Copied from https://bicyclecards.com/how-to-play/texas-holdem-poker/ *** ***</p> */}
             <h2>Poker Hands</h2>
             <ol>These hands are listed from best to worst. <br /> <br />
                 <li><strong><em>Royal Flush</em></strong> - this is the highest possible hand. A straight flush consists of the Ace, King, Queen, Jack, 10 all of the same suit. It is the straight flush with the highest possible cards</li>
-                <li><strong><em>Five of a Kind</em></strong> - This is the second highest possible hand and can occur only where at least one card is wild, such as a joker. Examples of five of a kind would be four 10s and a wild card or two queens and three wild cards.</li>
-                <li><strong><em>Straight Flush</em></strong> - This is the third highest possible hand. A straight flush consists of five cards of the same suit in sequence, such as 10, 9, 8, 7, 6 of hearts.</li>
-                <li><strong><em>Four of a Kind</em></strong> - This is the next highest hand. An example is four aces or four 3s.</li>
-                <li><strong><em>Full House</em></strong> - This colorful hand is made up of three cards of one rank and two cards of another rank, such as three 8s and two 4s.</li>
-                <li><strong><em>Flush</em></strong> - Five cards all of the same suit, but not all in sequence, is a flush. An example is Q, 10, 7, 6, and 2 of clubs.</li>
+                <li><strong><em>Five of a Kind</em></strong> - This can occur only where at least one card is wild, such as a joker. Examples of five of a kind would be four 10s and a wild card or two queens and three wild cards.</li>
+                <li><strong><em>Straight Flush</em></strong> A straight flush consists of five cards of the same suit in sequence, such as 10, 9, 8, 7, 6 of hearts.</li>
+                <li><strong><em>Four of a Kind</em></strong> - Four of the same card. An example is four aces or four 3s.</li>
+                <li><strong><em>Full House</em></strong> - This hand is made up of three cards of one rank and two cards of another rank, such as three 8s and two 4s.</li>
+                <li><strong><em>Flush</em></strong> - Five cards all of the same suit, but not in sequence, is a flush. An example is Q, 10, 7, 6, and 2 of clubs.</li>
                 <li><strong><em>Straight</em></strong> - Five cards in sequence, but not all of the same suit is a straight. An example is 9♥, 8♣, 7♠, 6♦, 5♥.</li>
                 <li><strong><em>Three of a Kind</em></strong> - This combination contains three cards of the same rank, and the other two cards each of a different rank, such as three jacks, a seven, and a four.</li>
                 <li><strong><em>Two Pairs</em></strong> - This hand contains a pair of one rank and another pair of a different rank, plus any fifth card of a different rank, such as Q, Q, 7, 7, 4.</li>
                 <li><strong><em>One Pair</em></strong> - This frequent combination contains just one pair with the other three cards being of different rank. An example is 10, 10, K, 4, 3.</li>
-                <li><strong><em>High Card</em></strong> - This very common hand contains "nothing." None of the five cards pair up, nor are all five cards of the same suit or consecutive in rank. When more than one player has no pair, the hands are rated by the highest card each hand contains, so that an ace-high hand beats a king-high hand, and so on.</li>   
+                <li><strong><em>High Card</em></strong> - This very common hand contains "nothing." None of the five cards pair up, nor are all five cards of the same suit or consecutive in rank. When more than one player has no pair, the hands are rated by the highest card each hand contains, so that an ace-high hand beats a king-high hand, and so on. If both player's high card is equal, then it goes to the second highest card ie King + 8 beats King + 7</li>   
 
 
             </ol>

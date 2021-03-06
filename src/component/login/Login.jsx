@@ -54,9 +54,9 @@ const Login = () => {
         <div id="parent">
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
             <Modal isOpen={showModal} id="modal"><h2>{errorMessage}</h2></Modal>
-            <h2>Would You Like To Play A Game</h2>
+            <h2>Would You Like To Play A Game?</h2>
             {/* {isAuth && <button id="start"><Link to="/game">Start A Game</Link></button>} */}
-            {isAuth && <button id="start"><Link to={{ pathname: "/game", state: {username : username}}}>Start A Game</Link></button>}
+            {isAuth && <button id="start"><Link to={{ pathname: "/game", state: {username : username}}}>Join A Table</Link></button>}
 
             {showForm ? 
                 <Form toggleForm={toggleForm} setAuth={setAuth} setErrorMessage={setErrorMessage} changeBuyIn={changeBuyIn} changeName={changeName} createPlayer={createPlayer} /> :
