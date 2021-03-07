@@ -12,7 +12,7 @@ class Service {
         console.log(body, "--------", headers)
         return axios.post(`${url}/register`, body, headers)
     }
-    createNewPlayer(body){
+    signIn(body){
         console.log(body, "--------", headers)
         return axios.post(`${url}/login`, body, headers)
     }
@@ -21,7 +21,7 @@ class Service {
         return axios.put(`${url}/buyin`, body, headers)
     }
     start(body){
-        return axios.post(`${url}/start`, body, headers)
+        return axios.post(`${url}/game/`, body, headers)
     }
     deal(gameId, body){
         return axios.post(`${url}/${gameId}`, headers)

@@ -22,11 +22,16 @@ const Game = props => {
     
     const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
 
-    const startGame = async e => {
+    const startGame = async (e, state) => {
         e.preventDefault();
-        let body = { username }
+        console.log(state)
+        let numberOfPlayers = state.numberOfPlayers;
+        let isCustom = state.isCustom;
+        let body = { username, numberOfPlayers, isCustom }
+        console.log(body)
         const data = await Service.start(body);
         console.log(data)
+        console.log(data.data)
     }
 
     const deal = async (e) => {

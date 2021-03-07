@@ -19,21 +19,23 @@ const SettingsForm = props => {
         })
         console.log(state)
     }
-
+    const sendSettings = () => {
+        console.log("sending state", state)
+        props.startGame(state)
+    }
 
     return ( 
         <div id="form2">
-            <form onSubmit={props.startGame}>
-            Display Name <br />
-            <input className="fields" type="text" name="displayName" onChange={handleChange} value={state.displayName} /><br />
-            Number of Players<br />
-            <input className="fields" type="number" name="numberOfPlayers" onChange={handleChange} value={state.numberOfPlayers} /><br />
-            Do you want to use custom rules?<br />
-            <input className="fields" type="checkbox" name="isCustom" onChange={handleChange} checked={state.isCustom} /><br />
-            <input className="submit" type="submit" value="Submit" />
-        </form>
+            <form onSubmit={sendSettings}>
+                Display Name <br />
+                <input className="fields" type="text" name="displayName" onChange={handleChange} value={state.displayName} /><br />
+                Number of Players<br />
+                <input className="fields" type="number" name="numberOfPlayers" onChange={handleChange} value={state.numberOfPlayers} /><br />
+                Do you want to use custom rules?<br />
+                <input className="fields" type="checkbox" name="isCustom" onChange={handleChange} checked={state.isCustom} /><br />
+                <input className="submit" type="submit" value="Submit" />
+            </form>
         </div>
-
      );
 }
  
