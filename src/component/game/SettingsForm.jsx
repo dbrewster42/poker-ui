@@ -19,7 +19,8 @@ const SettingsForm = props => {
         })
         console.log(state)
     }
-    const sendSettings = () => {
+    const sendSettings = e => {
+        e.preventDefault();
         console.log("sending state", state)
         props.startGame(state)
     }

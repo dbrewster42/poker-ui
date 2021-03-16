@@ -22,8 +22,8 @@ const Game = props => {
     
     const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
 
-    const startGame = async (e, state) => {
-        e.preventDefault();
+    const startGame = async (state) => {
+        //e.preventDefault();
         console.log(state)
         let numberOfPlayers = state.numberOfPlayers;
         let isCustom = state.isCustom;

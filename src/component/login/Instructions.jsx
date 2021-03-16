@@ -38,6 +38,7 @@ const Instructions = () => {
             in the game use these shared community cards in conjunction with their own hole cards to each make their best possible five-card poker hand. In Hold'em, a player may use any combination of the seven cards available to make the best possible five-card poker hand, using zero, one or two of their private hole cards.
             </p>
             <h4>The Blinds</h4>
+            {/* SEE HERE */}
             <p>In Hold'em, a marker called ‘the button’ or ‘the dealer button’ indicates which player is the dealer for the current game. Before the game begins, the player immediately clockwise from the button posts the "small blind", the first forced bet. The player immediately clockwise from the small blind posts the "big blind", which is typically twice the size of the small blind, but the blinds can vary depending on the stakes and betting structure being played.</p>
             <p>In Limit games, the big blind is the same as the small bet, and the small blind is typically half the size of the big blind but may be larger depending on the stakes. For example, in a $2/$4 Limit game the small blind is $1 and the big blind is $2. In a $15/$30 Limit game, the small blind is $10 and the big blind is $15.
 
