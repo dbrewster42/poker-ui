@@ -3,6 +3,7 @@ import Service from "../../service/Service"
 import { useEffect, useState } from "react";
 import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
+import MyInfo from "./MyInfo"
 
 function importAll(r) {
     let images = {};
@@ -66,19 +67,20 @@ const Game = props => {
             <div id="table">
                 {hasStarted ? 
                     <div> 
-                        {hasDealt ? 
-                            <div>
-                                {names.map(v => {
-                                    <PlayerInfo name={v} money={players[v]} hasDealt={hasDealt} username={username}  />
-                                })}
-                            </div>
-                            :
-                            <div>
-                                <button onClick={printData}>Check</button>
-                                <button id="start" onClick={deal}>Deal</button> 
-                            </div>
-                        }
-                        <MyInfo />
+                    
+                        <div>
+                            {names.map(v => {
+                                <PlayerInfo name={v} money={players[v]} hasDealt={hasDealt} username={username}  />
+                            })}
+                            {/* Do I need a separate component for current player? How else do I ensure it is at the bottom of the table? */}
+                            <MyInfo></MyInfo>
+                        </div>
+                        
+                        <div>
+                            <button onClick={printData}>Check</button>
+                            <button id="start" onClick={deal}>Deal</button> 
+                        </div>
+        
                     </div>
                     
 

@@ -6,6 +6,12 @@ const PlayerInfo = props => {
         <div>
             <h4>{name}</h4>
             {money}
+            {props.username == name ?
+                <div>Back Of Cards </div>
+            :
+                <div>Cards <img></img></div>
+
+            }
         </div>
      );
 }
