@@ -76,16 +76,22 @@ const Login = () => {
             <Modal isOpen={showModal} id="modal"><h2>{errorMessage}</h2></Modal>
             <h2>Would You Like To Play A Game?</h2>
             {/* {isAuth && <button id="start"><Link to="/game">Start A Game</Link></button>} */}
-            {isAuth && <button id="start"><Link to={{ pathname: "/game", state: {username : username}}}>Join A Table</Link></button>}
-
-            {showForm ? 
-                <PlayerForm toggleForm={toggleForm} setAuth={setAuth} setErrorMessage={setErrorMessage} changeBuyIn={changeBuyIn} changeName={changeName} createPlayer={createPlayer} isExisting={isExisting} logIn={logIn} /> :
-                <div>
-                    <h1 className="big">?<span id="oversize">?</span>?</h1>
-                    <button className="buttons" onClick={toggleFormForNew}>New Player</button>
-                    <button className="buttons" onClick={toggleForm}>Returning Player</button>
+            {isAuth ?
+             <button id="start"><Link to={{ pathname: "/game", state: {username : username}}}>Join A Table</Link></button>
+            :
+              <div>
+                    {showForm ? 
+                        <PlayerForm toggleForm={toggleForm} setErrorMessage={setErrorMessage} changeBuyIn={changeBuyIn} changeName={changeName} createPlayer={createPlayer} isExisting={isExisting} logIn={logIn} /> :
+                        <div>
+                            <h1 className="big">?<span id="oversize">?</span>?</h1>
+                            <button className="buttons" onClick={toggleFormForNew}>New Player</button>
+                            <button className="buttons" onClick={toggleForm}>Returning Player</button>
+                        </div>
+                    }
                 </div>
             }
+
+            
      
             <Instructions />
         </div>
