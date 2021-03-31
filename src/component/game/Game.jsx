@@ -20,12 +20,13 @@ const Game = props => {
     let [hasDealt, setHasDealt] = useState(false);
     let [id, setId] = useState(0);
     const [players, setPlayers] = useState({})
-    const [names, setNames] = useState([])
+    // const [names, setNames] = useState([])
     // let [body, setBody] = useState({});
     const username = props.location.state.username;
     // console.log(username)
     
     const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
+    const image = images[red_back]
 
     const startGame = async (state) => {
         // let displayName = state.displayName;
@@ -43,7 +44,7 @@ const Game = props => {
         setHasStarted(true)
         setId(data.data.gameId)
         setPlayers(data.data.body.players)
-        setNames(players.keys())
+        // setNames(players.keys())
     }
 
     const deal = async (e) => {
@@ -69,11 +70,11 @@ const Game = props => {
                     <div> 
                     
                         <div>
-                            {names.map(v => {
-                                <PlayerInfo name={v} money={players[v]} hasDealt={hasDealt} username={username}  />
+                            {players.map((v, i) => {
+                                <PlayerInfo image={image} name={v.username} money={v.money} hasDealt={hasDealt} key={i} />
                             })}
                             {/* Do I need a separate component for current player? How else do I ensure it is at the bottom of the table? */}
-                            <MyInfo></MyInfo>
+                            <MyInfo images={images} name={username} money={myMoney} hasDealt={hasDealt} hand={hand} />
                         </div>
                         
                         <div>

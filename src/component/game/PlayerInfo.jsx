@@ -1,9 +1,11 @@
+import "./Info.css"
+
 const PlayerInfo = props => {
     const name = props.name;
     const money = props.money;
 
     return ( 
-        <div>
+        <div class="info">
             <h4>{name}</h4>
             {money}
             {props.username == name ?
