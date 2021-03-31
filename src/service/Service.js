@@ -21,19 +21,19 @@ class Service {
         return axios.put(`${url}/buyin`, body, headers)
     }
     startGame(body){
-        return axios.post(`${url}/game/`, body, headers)
+        return axios.post(`${url}/game`, body, headers)
     }
-    newDeal(gameId){
-        return axios.get(`${url}/game/${gameId}/new-deal`, headers)
-    }
-    deal(gameId, body){
-        return axios.post(`${url}/game/${gameId}`, headers)
+    // newDeal(gameId){
+    //     return axios.get(`${url}/game/${gameId}/new-deal`, headers)
+    // }
+    deal(gameId){
+        return axios.get(`${url}/game/${gameId}`, headers)
     }
     getBetOptions(gameId){
         return axios.get(`${url}/game/${gameId}/bet`, headers)
     }
     bet(gameId, body){
-        return axios.post(`${url}/game/${gameId}`, body, headers)
+        return axios.post(`${url}/game/${gameId}/bet`, body, headers)
     }
 }
 export default new Service();
