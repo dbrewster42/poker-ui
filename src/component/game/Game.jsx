@@ -19,14 +19,15 @@ const Game = props => {
     let [hasStarted, setHasStarted] = useState(false);
     let [hasDealt, setHasDealt] = useState(false);
     let [id, setId] = useState(0);
-    const [players, setPlayers] = useState({})
+    const [players, setPlayers] = useState([])
+    const [hand, setHand] = useState([])
     // const [names, setNames] = useState([])
     // let [body, setBody] = useState({});
     const username = props.location.state.username;
     // console.log(username)
     
     const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
-    const image = images[red_back]
+    const image = images["red_back.png"]
 
     const startGame = async (state) => {
         // let displayName = state.displayName;
@@ -40,10 +41,15 @@ const Game = props => {
             isCustom: state.isCustom }
         console.log("request", body)
         const data = await Service.startGame(body);
-        console.log("response", data.data)
+        console.log("response", data)
+        console.log("response body", data.data)
         setHasStarted(true)
         setId(data.data.gameId)
-        setPlayers(data.data.body.players)
+        setPlayers(data.data.users)
+        setHand(data.data.hand)
+        if (data.data.betOptions.name == username){
+            displayBetOptions(data.data.betOptions);
+        }
         // setNames(players.keys())
     }
 
@@ -57,6 +63,12 @@ const Game = props => {
     const printData = () => {
         console.log(players)
         console.log(id)
+        console.log(hand)
+    }
+
+    const displayBetOptions = betOptions => {
+        console.log("Your Bet Options are", betOptions.possibleActions )
+        console.log(betOptions.betAmount)
     }
     // useEffect(() => {
 
@@ -71,10 +83,12 @@ const Game = props => {
                     
                         <div>
                             {players.map((v, i) => {
-                                <PlayerInfo image={image} name={v.username} money={v.money} hasDealt={hasDealt} key={i} />
+                                <PlayerInfo image={image} name={v.username} money={v.money} key={i} />
                             })}
                             {/* Do I need a separate component for current player? How else do I ensure it is at the bottom of the table? */}
-                            <MyInfo images={images} name={username} money={myMoney} hasDealt={hasDealt} hand={hand} />
+                            {/* <MyInfo images={images} name={username} money={myMoney} hasDealt={hasDealt} hand={hand} /> */}
+                            <MyInfo images={images} name={username} hand={hand} />
+
                         </div>
                         
                         <div>

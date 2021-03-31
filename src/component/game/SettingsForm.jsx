@@ -6,7 +6,7 @@ const SettingsForm = props => {
     const [state, setState] = useState({
         displayName: displayName,
         numberOfPlayers: 4,
-        bigBlind: null,
+        bigBlind: undefined,
         // maxBet: null, only ask if isCustom = true
         fillWithComputerPlayers : true,
         isCustom : false

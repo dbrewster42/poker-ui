@@ -1,5 +1,9 @@
 # TODO
 create separate handle change for booleans/checkboxes
+playerInfo not displaying
+
+
+
 
 # Getting Started with Create React App
 
