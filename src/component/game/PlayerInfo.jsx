@@ -8,16 +8,11 @@ const PlayerInfo = props => {
 
     return ( 
         <div className="info">
-            <h4>{name}</h4>
-            {money}
-           
-                <div>Back Of Cards </div>
-                <img className="cards" src={props.image} />
-                <img className="cards" src={props.image} />
-
-            
-
-            
+           <h4>{name}</h4> {money}$
+            <div>          
+               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} />
+               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} />
+            </div>                    
         </div>
      );
 }

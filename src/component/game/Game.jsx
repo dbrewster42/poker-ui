@@ -5,14 +5,14 @@ import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
 import MyInfo from "./MyInfo"
 
-function importAll(r) {
-    let images = {};
-    r.keys().forEach((item) => {        
-        images[item.replace("./", "")] = r(item);
-    });
-    console.log(images);
-    return images;
-  }
+// function importAll(r) {
+//     let images = {};
+//     r.keys().forEach((item) => {        
+//         images[item.replace("./", "")] = r(item);
+//     });
+//     console.log(images);
+//     return images;
+//   }
 
 const Game = props => {
     // console.log(props)
@@ -20,14 +20,17 @@ const Game = props => {
     let [hasDealt, setHasDealt] = useState(false);
     let [id, setId] = useState(0);
     const [players, setPlayers] = useState([])
+    const [cards, setCards] = useState([])
     const [hand, setHand] = useState([])
+    const [money, setMoney] = useState(0)
+    let [turn, setTurn] = useState(0);
     // const [names, setNames] = useState([])
     // let [body, setBody] = useState({});
     const username = props.location.state.username;
     // console.log(username)
     
-    const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
-    const image = images["red_back.png"]
+    // const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
+    // const image = images["red_back.png"]
 
     const startGame = async (state) => {
         // let displayName = state.displayName;
@@ -38,7 +41,9 @@ const Game = props => {
             displayName : state.numberOfPlayers,
             numberOfPlayers : state.numberOfPlayers,
             fillWithComputerPlayers: state.fillWithComputerPlayers,
-            isCustom: state.isCustom }
+            isCustom: state.isCustom,
+            bigBlind: state.bigBlind
+         }
         console.log("request", body)
         const data = await Service.startGame(body);
         console.log("response", data)
@@ -56,9 +61,10 @@ const Game = props => {
     const deal = async (e) => {
         e.preventDefault();
         console.log("hi")
-        let body = { username }
-        const data = await Service.deal(id, body);
+        // let body = { username }
+        const data = await Service.deal(id);
         console.log(data)
+        console.log("Dealt", data.data)
     }
     const printData = () => {
         console.log(players)
@@ -77,30 +83,34 @@ const Game = props => {
     return ( 
         <div id="background">
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
+            
+            <div>
+                <button onClick={printData}>Check</button>
+                <button id="start" onClick={deal}>Deal</button> 
+            </div>
             <div id="table">
                 {hasStarted ? 
                     <div> 
-                    
-                        <div>
-                            {players.map((v, i) => {
-                                <PlayerInfo image={image} name={v.username} money={v.money} key={i} />
-                            })}
-                            {/* Do I need a separate component for current player? How else do I ensure it is at the bottom of the table? */}
-                            {/* <MyInfo images={images} name={username} money={myMoney} hasDealt={hasDealt} hand={hand} /> */}
-                            <MyInfo images={images} name={username} hand={hand} />
-
-                        </div>
-                        
-                        <div>
-                            <button onClick={printData}>Check</button>
-                            <button id="start" onClick={deal}>Deal</button> 
-                        </div>
-        
-                    </div>
-                    
-
-                    :
-
+                        {players.map((v, i) => {
+                            if (v.username !== username){
+                                return (
+                                    <PlayerInfo name={v.username} money={v.money} key={i} class="info" />
+                                    // <PlayerInfo name={v.displayName} money={v.money} key={i} class="info" />
+                                )
+                            } else {
+                                setMoney(v.money)
+                            }                           
+                        })}
+                        {cards.length > 0 && cards.map((v, i) => {
+                            return (
+                                <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} />
+                            )
+                        })}
+                         <div id="my">
+                            <MyInfo name={username} money={money} hand={hand} class="info" /> 
+                        </div>      
+                    </div>                   
+                :
                     <SettingsForm startGame={startGame} username={username} />
                 }
                   

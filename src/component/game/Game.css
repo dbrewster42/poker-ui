@@ -9,18 +9,20 @@
     color: #05F100;
     font-family: 'Share Tech Mono', monospace;
     width: 100%;
-    height: 1000px;
+    height: 1200px;
     padding: 10px;
 }
 #table {
     /* background-image: url("../../images/green.jpg"); */
     background-color: seagreen;
     border: 15px solid saddlebrown;
-    border-radius: 10px;
-    width: 72%;
-    height: 500px;
-    margin-left: 14%;
-    margin-top: 7%;
+    border-radius: 20px;
+    width: 80%;
+    height: 700px;
+    margin-left: 10%;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
 }
 #start {
     width: 18%;
@@ -39,3 +41,48 @@
     from {background-color: seagreen;}
     to {background-color: red;}
 }
+
+/* #C0 {
+    margin-left: 1%;
+    margin-top: 20%;
+    color: white;
+}
+#C1 {
+    margin-left: 20%;
+    margin-top: 1%;
+    color: white;
+}
+#C2 {
+    margin-left: 20%;
+    margin-top: 0%;
+}
+#C3 {
+    display: block;
+    margin-left: 40%;
+    margin-top: 20%;
+    width: 22%;
+    height: 27%;
+} */
+.info {
+    width: 17%;
+    height: 25%;
+    padding: 5px;
+    border: 1px dashed black;
+    border-radius: 10px;
+    background-color: rgb(38, 48, 58);
+    color: #05F100;
+    display: inline-flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+#my {
+    margin-top: 17%;
+}
+/* #info {
+    width: 22%;
+    height: 27%;
+    border: 1px dashed black;
+    border-radius: 10px;
+    background-color: rgb(38, 48, 58);
+    color: #05F100;
+} */

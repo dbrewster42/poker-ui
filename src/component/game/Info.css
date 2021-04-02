@@ -1,4 +1,4 @@
-.info {
+/* .info {
     margin: 1%;
     width: 20%;
     height: 30%;
@@ -7,4 +7,13 @@
 }
 .my {
     color:  rgb(38, 48, 58);
+} */
+.cards {
+    display: inline-block;
+    width: 54px;
+    margin-left: 2%;
+}
+h4 {
+    display: inline-block;
+    margin: 0%;
 }
