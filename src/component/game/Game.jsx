@@ -76,6 +76,7 @@ const Game = props => {
         console.log("Your Bet Options are", betOptions.possibleActions )
         console.log(betOptions.betAmount)
     }
+
     // useEffect(() => {
 
     // }, [])
@@ -88,6 +89,7 @@ const Game = props => {
                 <button onClick={printData}>Check</button>
                 <button id="start" onClick={deal}>Deal</button> 
             </div>
+
             <div id="table">
                 {hasStarted ? 
                     <div> 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../login/Login.css"
+import "./Form.css"
 
 const SettingsForm = props => {
     const [displayName] = useState(props.username);
@@ -29,7 +29,7 @@ const SettingsForm = props => {
     }
 
     return ( 
-        <div id="form2">
+        <div id="form">
             <form onSubmit={sendSettings}>
                 Display Name <br />
                 <input className="fields" type="text" name="displayName" onChange={handleChange} value={state.displayName} /><br />

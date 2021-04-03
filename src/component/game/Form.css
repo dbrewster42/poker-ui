@@ -1,0 +1,26 @@
+.fields {
+    width: 50%;
+    height: 30px;
+}
+
+.submit {
+    background-color: black;
+    color: white;
+    margin: 2%;
+}
+
+/* #form {
+    background-color: rgb(60, 73, 87);
+    border: 2px solid black;
+    width: 30%;
+    margin-left: 35%;
+} */
+
+#form {
+    background-color: rgb(60, 73, 87);
+    border: 2px solid black;
+    width: 50%;
+    height: 65%;
+    margin-left: 25%;
+    margin-top: 6%;
+}
