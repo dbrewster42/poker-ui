@@ -1,3 +1,11 @@
+# TODO
+1. create separate handle change for booleans/checkboxes
+
+2. should other player's betOptions be displayed for me? (displayed when not user's turn)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

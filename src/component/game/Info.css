@@ -1,0 +1,19 @@
+/* .info {
+    margin: 1%;
+    width: 20%;
+    height: 30%;
+    border: 1px dashed black;
+    border-radius: 10px;
+}
+.my {
+    color:  rgb(38, 48, 58);
+} */
+.cards {
+    display: inline-block;
+    width: 54px;
+    margin-left: 2%;
+}
+h4 {
+    display: inline-block;
+    margin: 0%;
+}
