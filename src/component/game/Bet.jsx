@@ -5,17 +5,18 @@ import Service from "../../service/Service"
 
 const Bet = props => {
     let [action, setAction] = useState();
+    let [possibleActions] = useState(props.betOptions.possibleActions)
 
     const placeBet = async e => {
         e.preventDefault();
         console.log(action)
-        const data = await Service.bet(props.id, action);
-        console.log("response", data)
+        props.placeBet(action)
+    
     }
 
     const handleChange = e => {
-        setAction(e.value)
-        console.log(e.value)
+        setAction(e.target.value)
+        console.log(e)
     }
 
 
@@ -27,16 +28,13 @@ const Bet = props => {
             </p>
             
             <form onSubmit={placeBet}>
-                
-                <input className="fields" type="radio" name="action" onChange={handleChange} value={state.displayName} /><br />
-                Number of Players<br />
-                <input className="fields" type="number" name="numberOfPlayers" onChange={handleChange} value={state.numberOfPlayers} /><br />
-                Big Blind<br />
-                <input className="fields" type="number" name="bigBlind" onChange={handleChange} value={state.bigBlind} /><br />
-                Fill Empty Slots with Computer Players?
-                <input className="fields" type="checkbox" name="fillWithComputerPlayers" onChange={handleChange} checked={state.fillWithComputerPlayers} /><br />
-                Do you want to use custom rules?<br />
-                <input className="fields" type="checkbox" name="isCustom" onChange={handleChange} checked={state.isCustom} /><br />
+                {possibleActions[0]}<br />
+                <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[0]} /><br />
+                {possibleActions[1]}<br />
+                <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[1]} /><br />
+                {possibleActions[2]}<br />
+                <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[2]} /><br />
+               
                 <input className="submit" type="submit" value="Submit" />
             </form>
         </div>

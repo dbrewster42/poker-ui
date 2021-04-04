@@ -1,6 +1,7 @@
 # TODO
-create separate handle change for booleans/checkboxes
-playerInfo not displaying
+1. create separate handle change for booleans/checkboxes
+
+2. should other player's betOptions be displayed for me? (displayed when not user's turn)
 
 
 

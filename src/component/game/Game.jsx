@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
 import MyInfo from "./MyInfo"
+import Bet from "./Bet"
 
 // function importAll(r) {
 //     let images = {};
@@ -24,6 +25,9 @@ const Game = props => {
     const [hand, setHand] = useState([])
     const [money, setMoney] = useState(0)
     let [turn, setTurn] = useState(0);
+    let [isBet, setIsBet] = useState(false);
+    let [betOptions, setBetOptions] = useState();
+    const [betLog, setBetLog] = useState([]);
     // const [names, setNames] = useState([])
     // let [body, setBody] = useState({});
     const username = props.location.state.username;
@@ -52,9 +56,11 @@ const Game = props => {
         setId(data.data.gameId)
         setPlayers(data.data.users)
         setHand(data.data.hand)
-        if (data.data.betOptions.name == username){
-            displayBetOptions(data.data.betOptions);
-        }
+        setBetOptions(data.data.betOptions)
+        setIsBet(true)
+        // if (data.data.betOptions.name == username){
+        //     displayBetOptions(data.data.betOptions);
+        // }
         // setNames(players.keys())
     }
 
@@ -75,6 +81,17 @@ const Game = props => {
     const displayBetOptions = betOptions => {
         console.log("Your Bet Options are", betOptions.possibleActions )
         console.log(betOptions.betAmount)
+    }
+
+    const placeBet = action => {
+        const data = await Service.bet(id, action);
+        if (data.data.isBet){
+            setBetOptions(data.data.betOptions)
+        } else {
+            setIsBet(false)
+        }
+        
+        console.log("response", data)
     }
 
     // useEffect(() => {
@@ -117,7 +134,8 @@ const Game = props => {
                 }
                   
             </div>
-               
+            {/* {isBet && <Bet id={id} betOptions={betOptions} username={username} setIsBet={setIsBet} />} */}
+            {isBet && <Bet betOptions={betOptions} username={username} />}
             {/* {images.map((image, i) => {
                 return (
                     <img src={image} className="cards" />
