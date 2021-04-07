@@ -29,8 +29,11 @@ class Service {
     deal(gameId){
         return axios.get(`${url}/game/${gameId}`, headers)
     }
-    getBetOptions(gameId){
-        return axios.get(`${url}/game/${gameId}/bet`, headers)
+    // getBetOptions(gameId){
+    //     return axios.get(`${url}/game/${gameId}/bet`, headers)
+    // }
+    getBetOptions(gameId, username){
+        return axios.get(`${url}/game/${gameId}/bet`, username, headers)
     }
     bet(gameId, body){
         return axios.post(`${url}/game/${gameId}/bet`, body, headers)

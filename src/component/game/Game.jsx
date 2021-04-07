@@ -5,6 +5,7 @@ import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
 import MyInfo from "./MyInfo"
 import Bet from "./Bet"
+import Log from "./Log"
 
 // function importAll(r) {
 //     let images = {};
@@ -56,11 +57,11 @@ const Game = props => {
         setId(data.data.gameId)
         setPlayers(data.data.users)
         setHand(data.data.hand)
-        setBetOptions(data.data.betOptions)
         setIsBet(true)
-        // if (data.data.betOptions.name == username){
-        //     displayBetOptions(data.data.betOptions);
-        // }
+        if (data.data.betOptions.name == username){
+            setBetOptions(data.data.betOptions)
+            displayBetOptions(data.data.betOptions);
+        }
         // setNames(players.keys())
     }
 
@@ -83,12 +84,21 @@ const Game = props => {
         console.log(betOptions.betAmount)
     }
 
-    const placeBet = action => {
+    const placeBet = async action => {
         const data = await Service.bet(id, action);
         if (data.data.isBet){
-            setBetOptions(data.data.betOptions)
+            const betOptions = await Service.getBetOptions(id);
+            // setBetOptions(data.data.betOptions)
+            if (betOptions.data.name == username){
+                setBetOptions(betOptions.data)
+                displayBetOptions(data.data.betOptions);
+            }
+            //setBetOptions(betOptions.data)
+            //Service.getBetOptions(id, username);
         } else {
             setIsBet(false)
+            //call deal in service?
+            //FIXME
         }
         
         console.log("response", data)
