@@ -9,13 +9,13 @@ const MyInfo = props => {
     return ( 
         <div className="my info">
             <h4>{name}</h4> {money}$
-            <div>
-                <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[0].image} />
-                <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[1].image} />
-            </div>
-            
-
-            
+            {props.hand.length > 0 &&
+                <div>
+                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[0].image} />
+                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[1].image} />
+                </div>
+            }           
+       
         </div>
      );
 }

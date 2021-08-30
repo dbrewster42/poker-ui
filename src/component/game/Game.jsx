@@ -18,20 +18,24 @@ import Log from "./Log"
 
 const Game = props => {
     // console.log(props)
-    let [hasStarted, setHasStarted] = useState(false);
     let [hasDealt, setHasDealt] = useState(false);
-    let [id, setId] = useState(0);
-    const [players, setPlayers] = useState([])
+    let id = props.id;
+    let hasStarted = props.hasStarted;
+    let players = props.players;
+    let hand = props.hand;
+    let betOptions = props.betOptions;
+    let isBet = props.isBet
+    // const [players, setPlayers] = useState([])
     const [cards, setCards] = useState([])
-    const [hand, setHand] = useState([])
+    // const [hand, setHand] = useState([])
     const [money, setMoney] = useState(0)
     let [turn, setTurn] = useState(0);
-    let [isBet, setIsBet] = useState(false);
-    let [betOptions, setBetOptions] = useState();
+    // let [isBet, setIsBet] = useState(false);
+    // let [betOptions, setBetOptions] = useState();
     const [betLog, setBetLog] = useState([]);
     // const [names, setNames] = useState([])
     // let [body, setBody] = useState({});
-    const username = props.location.state.username;
+    const username = props.username;
     // console.log(username)
     
     // const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
@@ -53,15 +57,16 @@ const Game = props => {
         const data = await Service.startGame(body);
         console.log("response", data)
         console.log("response body", data.data)
-        setHasStarted(true)
-        setId(data.data.gameId)
-        setPlayers(data.data.users)
-        setHand(data.data.hand)
-        setIsBet(true)
-        if (data.data.betOptions.name == username){
-            setBetOptions(data.data.betOptions)
-            displayBetOptions(data.data.betOptions);
-        }
+        props.setVariables(data.data);
+        // setHasStarted(true)
+        // setId(data.data.gameId)
+        // setPlayers(data.data.users)
+        // setHand(data.data.hand)
+        // setIsBet(true)
+        // if (data.data.betOptions.name == username){
+        //     setBetOptions(data.data.betOptions)
+        //     displayBetOptions(data.data.betOptions);
+        // }
         // setNames(players.keys())
     }
 
@@ -79,30 +84,8 @@ const Game = props => {
         console.log(hand)
     }
 
-    const displayBetOptions = betOptions => {
-        console.log("Your Bet Options are", betOptions.possibleActions )
-        console.log(betOptions.betAmount)
-    }
 
-    const placeBet = async action => {
-        const data = await Service.bet(id, action);
-        if (data.data.isBet){
-            const betOptions = await Service.getBetOptions(id);
-            // setBetOptions(data.data.betOptions)
-            if (betOptions.data.name == username){
-                setBetOptions(betOptions.data)
-                displayBetOptions(data.data.betOptions);
-            }
-            //setBetOptions(betOptions.data)
-            //Service.getBetOptions(id, username);
-        } else {
-            setIsBet(false)
-            //call deal in service?
-            //FIXME
-        }
-        
-        console.log("response", data)
-    }
+   
 
     // useEffect(() => {
 
@@ -113,8 +96,8 @@ const Game = props => {
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
             
             <div>
-                <button onClick={printData}>Check</button>
-                <button id="start" onClick={deal}>Deal</button> 
+                <button onClick={() => printData}>Check</button>
+                <button id="start" onClick={() => deal}>Deal</button> 
             </div>
 
             <div id="table">
