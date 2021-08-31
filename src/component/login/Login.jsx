@@ -13,8 +13,14 @@ const Login = () => {
     const [isAuth, setIsAuth] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
+    // const username = props.username;
     const [username, setUsername] = useState("Enter Your Unique Username");
     const [buyIn, setBuyIn] = useState(100);
+
+    const changeName = e => {
+        setUsername(e.target.value)
+        console.log("set username", e.target.value)
+    }
 
     const setAuth = () => {
         setIsAuth(true);
@@ -63,11 +69,12 @@ const Login = () => {
         setAuth(true)
     }
 
-    const changeName = e => {
-        setUsername(e.target.value)
-    }
+
     const changeBuyIn = e => {
         setBuyIn(e.target.value)
+    }
+    const printUsername = e => {
+        console.log(username)
     }
 
     return ( 
@@ -77,7 +84,8 @@ const Login = () => {
             <h2>Would You Like To Play A Game?</h2>
             {/* {isAuth && <button id="start"><Link to="/game">Start A Game</Link></button>} */}
             {isAuth ?
-             <button id="start"><Link to={{ pathname: "/game", state: {username : username}}}>Join A Table</Link></button>
+            <button id="start"><Link to={{ pathname: "/game", state: { username : username}}}>Join A Table</Link></button>
+
             :
               <div>
                     {showForm ? 
@@ -92,7 +100,7 @@ const Login = () => {
             }
 
             
-     
+            <button onClick={printUsername}>Print Username</button>
             <Instructions />
         </div>
      );
