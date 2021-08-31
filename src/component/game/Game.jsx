@@ -25,8 +25,9 @@ const Game = props => {
     let hand = props.hand;
     let betOptions = props.betOptions;
     let isBet = props.isBet
+    let cards = props.cards
     // const [players, setPlayers] = useState([])
-    const [cards, setCards] = useState([])
+    // const [cards, setCards] = useState([])
     // const [hand, setHand] = useState([])
     const [money, setMoney] = useState(0)
     let [turn, setTurn] = useState(0);
@@ -42,12 +43,9 @@ const Game = props => {
     // const image = images["red_back.png"]
 
     const startGame = async (state) => {
-        // let displayName = state.displayName;
-        // let numberOfPlayers = state.numberOfPlayers;
-        // let fillWithComputerPlayers = state.hasComputers;
-        // let isCustom = state.isCustom;
+        console.log("state", state)
         let body = { username, 
-            displayName : state.numberOfPlayers,
+            displayName : state.name,
             numberOfPlayers : state.numberOfPlayers,
             fillWithComputerPlayers: state.fillWithComputerPlayers,
             isCustom: state.isCustom,
@@ -55,7 +53,7 @@ const Game = props => {
          }
         console.log("request", body)
         const data = await Service.startGame(body);
-        console.log("response", data)
+        // console.log("response", data)
         console.log("response body", data.data)
         props.setVariables(data.data);
         // setHasStarted(true)
@@ -70,14 +68,6 @@ const Game = props => {
         // setNames(players.keys())
     }
 
-    const deal = async (e) => {
-        e.preventDefault();
-        console.log("hi")
-        // let body = { username }
-        const data = await Service.deal(id);
-        console.log(data)
-        console.log("Dealt", data.data)
-    }
     const printData = () => {
         console.log(players)
         console.log(id)
@@ -96,8 +86,8 @@ const Game = props => {
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
             
             <div>
-                <button onClick={() => printData}>Check</button>
-                <button id="start" onClick={() => deal}>Deal</button> 
+                <button onClick={() => printData()}>Check</button>
+                <button id="start" onClick={(e) => props.deal(e)}>Deal</button> 
             </div>
 
             <div id="table">

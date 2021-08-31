@@ -30,7 +30,7 @@ const SettingsForm = props => {
 
     return ( 
         <div id="form">
-            <form onSubmit={sendSettings}>
+            <form onSubmit={(e) => sendSettings(e)}>
                 Display Name <br />
                 <input className="fields" type="text" name="displayName" onChange={handleChange} value={state.displayName} /><br />
                 Number of Players<br />
