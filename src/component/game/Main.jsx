@@ -4,14 +4,11 @@ import Service from "../../service/Service"
 
 
 const Main = props => {
-    // let [username, setUsername] = useState("user");
     let username;
     console.log(props.location)
     if (props.location.state !== undefined){
         console.log("setting username", props.location.state)
-        // const username = props.location.state.username;
         username = props.location.state.username
-        // setUsername(props.location.state.username)
     }
     let [isBet, setIsBet] = useState(false);
     let [betOptions, setBetOptions] = useState();
@@ -24,8 +21,7 @@ const Main = props => {
 
     const deal = async (e) => {
         e.preventDefault();
-        console.log("hi")
-        // let body = { username }
+        console.log("dealing")
         const data = await Service.deal(id);
         console.log(data)
         console.log("Dealt", data.data)
@@ -42,36 +38,36 @@ const Main = props => {
         // setIsBet(true)
         console.log("BET OPTIONS", data.betOptions)
         if (data.betOptions.name === username){
-            setAndDisplayBetOptions(data.betOptions)
+            setBetOptions(data.betOptions)
         } else {
             getMyBetOptions();
         }
     }
+
     const getMyBetOptions = async () => {
+        console.log("getting my betOptions")
         let betOptions = await Service.getBetOptions(id)
-            while (betOptions.name !== username){
-                betOptions = await Service.getBetOptions(id);
-            }
-            setAndDisplayBetOptions(betOptions)
-    }
-    const setAndDisplayBetOptions = betOptions => {
+        console.log(betOptions)
+        while (betOptions.name !== username){
+            betOptions = await Service.getBetOptions(id);
+        }
         setBetOptions(betOptions)
-        displayBetOptions(betOptions);
-        setIsBet(true)
     }
-    const displayBetOptions = betOptions => {
+
+    const setBetOptions = betOptions => {
+        setBetOptions(betOptions)
         console.log("Your Bet Options are", betOptions.possibleActions )
         console.log(betOptions.betAmount)
+        setIsBet(true)
     }
+
     const placeBet = async action => {
         const data = await Service.bet(id, action);
         if (data.data.isBet){
             const betOptions = await Service.getBetOptions(id);
             // setBetOptions(data.data.betOptions)
-            if (betOptions.data.name == username){
-                setAndDisplayBetOptions(betOptions.data)
-                // setBetOptions(betOptions.data)
-                // displayBetOptions(data.data.betOptions);
+            if (betOptions.data.name === username){
+                setBetOptions(betOptions.data)
             }
             //setBetOptions(betOptions.data)
             //Service.getBetOptions(id, username);
@@ -85,7 +81,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game setVariables={setVariables} setAndDisplayBetOptions={setAndDisplayBetOptions} deal={deal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} />
+        <Game setVariables={setVariables} deal={deal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} />
      );
 }
  

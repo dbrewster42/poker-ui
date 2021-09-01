@@ -7,14 +7,6 @@ import MyInfo from "./MyInfo"
 import Bet from "./Bet"
 import Log from "./Log"
 
-// function importAll(r) {
-//     let images = {};
-//     r.keys().forEach((item) => {        
-//         images[item.replace("./", "")] = r(item);
-//     });
-//     console.log(images);
-//     return images;
-//   }
 
 const Game = props => {
     // console.log(props)
@@ -26,21 +18,11 @@ const Game = props => {
     let betOptions = props.betOptions;
     let isBet = props.isBet
     let cards = props.cards
-    // const [players, setPlayers] = useState([])
-    // const [cards, setCards] = useState([])
-    // const [hand, setHand] = useState([])
     const [money, setMoney] = useState(0)
     let [turn, setTurn] = useState(0);
-    // let [isBet, setIsBet] = useState(false);
-    // let [betOptions, setBetOptions] = useState();
     const [betLog, setBetLog] = useState([]);
-    // const [names, setNames] = useState([])
-    // let [body, setBody] = useState({});
     const username = props.username;
-    // console.log(username)
     
-    // const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
-    // const image = images["red_back.png"]
 
     const startGame = async (state) => {
         console.log("state", state)
@@ -74,9 +56,6 @@ const Game = props => {
         console.log(hand)
     }
 
-
-   
-
     // useEffect(() => {
 
     // }, [])
@@ -105,7 +84,7 @@ const Game = props => {
                         })}
                         {cards.length > 0 && cards.map((v, i) => {
                             return (
-                                <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} />
+                                <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
                             )
                         })}
                          <div id="my">
@@ -117,13 +96,9 @@ const Game = props => {
                 }
                   
             </div>
-            {/* {isBet && <Bet id={id} betOptions={betOptions} username={username} setIsBet={setIsBet} />} */}
+
             {isBet && <Bet betOptions={betOptions} username={username} />}
-            {/* {images.map((image, i) => {
-                return (
-                    <img src={image} className="cards" />
-                )
-            })} */}
+
         </div>
      );
 }

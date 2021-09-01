@@ -10,8 +10,8 @@ const PlayerInfo = props => {
         <div className="info">
            <h4>{name}</h4> {money}$
             <div>          
-               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} />
-               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} />
+               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
+               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
             </div>                    
         </div>
      );
