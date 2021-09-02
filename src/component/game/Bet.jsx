@@ -7,11 +7,10 @@ const Bet = props => {
     let [action, setAction] = useState();
     let [possibleActions] = useState(props.betOptions.possibleActions)
 
-    const placeBet = async e => {
+    const beginBet = async e => {
         e.preventDefault();
         console.log(action)
         props.placeBet(action)
-    
     }
 
     const handleChange = e => {
@@ -27,7 +26,7 @@ const Bet = props => {
                 Minimum Bet : {props.betAmount}$
             </p>
             
-            <form onSubmit={placeBet}>
+            <form onSubmit={(e) => beginBet(e)}>
                 {possibleActions[0]}<br />
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[0]} /><br />
                 {possibleActions[1]}<br />

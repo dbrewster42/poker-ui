@@ -1,0 +1,11 @@
+#log {
+    border: 2px solid royalblue;
+    width: 90%;
+    margin-left: 5%;
+}
+#betList {
+  overflow: scroll;
+  width: 100%;
+  height: 100%;  
+  background-color: slategray;
+}

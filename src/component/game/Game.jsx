@@ -97,7 +97,8 @@ const Game = props => {
                   
             </div>
 
-            {isBet && <Bet betOptions={betOptions} username={username} />}
+            {isBet && <Bet betOptions={betOptions} username={username} placeBet={props.placeBet} />}
+            <Log bets={props.bets} />
 
         </div>
      );
