@@ -1,6 +1,6 @@
 import "./Game.css"
 import Service from "../../service/Service"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
 import MyInfo from "./MyInfo"
@@ -10,7 +10,7 @@ import Log from "./Log"
 
 const Game = props => {
     // console.log(props)
-    let [hasDealt, setHasDealt] = useState(false);
+    // let [hasDealt, setHasDealt] = useState(false);
     let id = props.id;
     let hasStarted = props.hasStarted;
     let players = props.players;
@@ -19,8 +19,8 @@ const Game = props => {
     let isBet = props.isBet
     let cards = props.cards
     const [money, setMoney] = useState(0)
-    let [turn, setTurn] = useState(0);
-    const [betLog, setBetLog] = useState([]);
+    // let [turn, setTurn] = useState(0);
+    // const [betLog, setBetLog] = useState([]);
     const username = props.username;
     
 
@@ -94,11 +94,11 @@ const Game = props => {
                 :
                     <SettingsForm startGame={startGame} username={username} />
                 }
-                  
+                {isBet && <Bet betOptions={betOptions} username={username} placeBet={props.placeBet} />}
             </div>
 
-            {isBet && <Bet betOptions={betOptions} username={username} placeBet={props.placeBet} />}
-            <Log bets={props.bets} />
+            
+            <Log betLog={props.betLog} />
 
         </div>
      );

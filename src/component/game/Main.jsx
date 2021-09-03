@@ -17,7 +17,7 @@ const Main = props => {
     // const [players, setPlayers] = useState([])
     const [cards, setCards] = useState([])
     const [hand, setHand] = useState([])
-    const [bets, setBets] = useState([])
+    const [betLog, setBetLog] = useState([])
     let players = [];
 
     const deal = async (e) => {
@@ -63,12 +63,17 @@ const Main = props => {
         setIsBet(true)
     }
 
-    const placeBet = async action => {
+    const placeBet = async (action, betAmount) => {
         // e.preventDefault();
+        let body = {
+            action,
+            betAmount,
+            username
+        }
+        const data = await Service.bet(id, body);
         setIsBet(false)
-        const data = await Service.bet(id, action);
         console.log("Bet Response", data)
-        setBets(data.data.bets)
+        setBetLog(data.data.bets)
         if (data.data.isBet){
             const betOptions = await Service.getBetOptions(id);
             if (betOptions.data.name === username){
@@ -84,7 +89,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game setVariables={setVariables} deal={deal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} bets={bets} placeBet={placeBet} />
+        <Game setVariables={setVariables} deal={deal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} betLog={betLog} placeBet={placeBet} />
      );
 }
  

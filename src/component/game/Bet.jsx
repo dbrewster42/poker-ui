@@ -4,13 +4,15 @@ import "./Form.css"
 
 
 const Bet = props => {
+    console.log(props)
     let [action, setAction] = useState();
+    let [betAmount, setBetAmount] = useState(props.betOptions.betAmount);
     let [possibleActions] = useState(props.betOptions.possibleActions)
 
     const beginBet = async e => {
         e.preventDefault();
         console.log(action)
-        props.placeBet(action)
+        props.placeBet(action, betAmount)
     }
 
     const handleChange = e => {
@@ -18,22 +20,26 @@ const Bet = props => {
         console.log(e)
     }
 
+    const handleAmountChange = e => {
+        setBetAmount(e.target.value)
+    }
+
 
     return ( 
         <div id="form">
             <p>
-                Current Pot : {props.pot}$
-                Minimum Bet : {props.betAmount}$
+                Current Pot : {props.betOptions.pot}$ <br />
+                Minimum Bet : {props.betOptions.betAmount}$
             </p>
             
             <form onSubmit={(e) => beginBet(e)}>
-                {possibleActions[0]}<br />
+                {possibleActions[0]}
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[0]} /><br />
-                {possibleActions[1]}<br />
+                {possibleActions[1]}
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[1]} /><br />
-                {possibleActions[2]}<br />
+                {possibleActions[2]}
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[2]} /><br />
-                <input className="fields" type="integer" name="betAmount" onChange={handleChange} value={props.betAmount} /><br />
+                <input className="fields" type="integer" name="betAmount" onChange={handleAmountChange} value={betAmount} /><br />
                 <input className="submit" type="submit" value="Submit" />
             </form>
         </div>
