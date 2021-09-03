@@ -5,6 +5,7 @@ import PlayerInfo from "./PlayerInfo"
 import MyInfo from "./MyInfo"
 import Bet from "./Bet"
 import Log from "./Log"
+import Modal from "react-modal";
 
 
 const Game = props => {
@@ -37,7 +38,7 @@ const Game = props => {
             </div>
 
             <div id="table">
-                <Modal isOpen={props.showModal} id="modal"><h2>{props.errorMessage}</h2></Modal>
+                <Modal isOpen={props.showModal} id="modal"><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
                 <Modal isOpen={props.isBet} id="modal">
                     <Bet betOptions={betOptions} placeBet={props.placeBet} />
                 </Modal>

@@ -31,9 +31,12 @@ const Main = props => {
             console.log("Dealt", data.data)
             setCards(data.data)
         } catch (err){
-            console.log(err)
+            console.error(err)
             setErrorMessage(err.response.data.errMessage)
             setShowModal(true)
+            setTimeout(function(){
+                setShowModal(false)
+            }, (2500))
         }    
         // const betOptions = await Service.getBetOptions(id);
     }
@@ -56,6 +59,9 @@ const Main = props => {
             console.error(err)
             setErrorMessage(err.response.data.errMessage)
             setShowModal(true)
+            setTimeout(function(){
+                setShowModal(false)
+            }, (2500))
         }
 
     }
@@ -89,6 +95,9 @@ const Main = props => {
             console.log(err)
             setErrorMessage(err.response.data.errMessage)
             setShowModal(true)
+            setTimeout(function(){
+                setShowModal(false)
+            }, (2500))
         }
 
     }
@@ -126,8 +135,13 @@ const Main = props => {
             //} 
         } catch (err){
             console.log(err)
+            console.log(err.response)
+            console.log(err.data)
             setErrorMessage(err.response.data.errMessage)
             setShowModal(true)
+            setTimeout(function(){
+                setShowModal(false)
+            }, (2500))
         }
     }
 

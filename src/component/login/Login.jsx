@@ -58,9 +58,12 @@ const Login = () => {
             const data = await Service.signIn(body)
             console.log(data.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
             setErrorMessage(err.response.data.errMessage)
             setShowModal(true)
+            setTimeout(function(){
+                setShowModal(false)
+            }, (2500))
         }
         setAuth(true)
     }
