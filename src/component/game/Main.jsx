@@ -38,6 +38,28 @@ const Main = props => {
         // const betOptions = await Service.getBetOptions(id);
     }
 
+    const startGame = async (state) => {
+        console.log("state", state)
+        let body = { username, 
+            displayName : state.displayName,
+            numberOfPlayers : state.numberOfPlayers,
+            fillWithComputerPlayers: state.fillWithComputerPlayers,
+            isCustom: state.isCustom,
+            bigBlind: state.bigBlind
+         }
+        console.log("request", body)
+        try {
+            const data = await Service.startGame(body);
+            console.log("response body", data.data)
+            setVariables(data.data);
+        } catch (err){
+            console.error(err)
+            setErrorMessage(err.response.data.errMessage)
+            setShowModal(true)
+        }
+
+    }
+
     const setVariables= data => {
         setHasStarted(true)
         setId(data.gameId)
@@ -110,7 +132,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game setVariables={setVariables} deal={deal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} placeBet={placeBet} />
+        <Game startGame={startGame} deal={deal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} placeBet={placeBet} />
      );
 }
  

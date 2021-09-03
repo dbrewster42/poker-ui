@@ -1,5 +1,4 @@
 import "./Game.css"
-import Service from "../../service/Service"
 import { useState } from "react";
 import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
@@ -9,46 +8,14 @@ import Log from "./Log"
 
 
 const Game = props => {
-    // console.log(props)
-    // let [hasDealt, setHasDealt] = useState(false);
     let id = props.id;
-    let hasStarted = props.hasStarted;
     let players = props.players;
     let hand = props.hand;
     let betOptions = props.betOptions;
-    let isBet = props.isBet
     let cards = props.cards
     const [money, setMoney] = useState(0)
-    // let [turn, setTurn] = useState(0);
-    // const [betLog, setBetLog] = useState([]);
     const username = props.username;
-    
 
-    const startGame = async (state) => {
-        console.log("state", state)
-        let body = { username, 
-            displayName : state.displayName,
-            numberOfPlayers : state.numberOfPlayers,
-            fillWithComputerPlayers: state.fillWithComputerPlayers,
-            isCustom: state.isCustom,
-            bigBlind: state.bigBlind
-         }
-        console.log("request", body)
-        const data = await Service.startGame(body);
-        // console.log("response", data)
-        console.log("response body", data.data)
-        props.setVariables(data.data);
-        // setHasStarted(true)
-        // setId(data.data.gameId)
-        // setPlayers(data.data.users)
-        // setHand(data.data.hand)
-        // setIsBet(true)
-        // if (data.data.betOptions.name == username){
-        //     setBetOptions(data.data.betOptions)
-        //     displayBetOptions(data.data.betOptions);
-        // }
-        // setNames(players.keys())
-    }
 
     const printData = () => {
         console.log(players)
@@ -71,12 +38,12 @@ const Game = props => {
 
             <div id="table">
                 <Modal isOpen={props.showModal} id="modal"><h2>{props.errorMessage}</h2></Modal>
-                <Modal isOpen={isBet} id="modal">
+                <Modal isOpen={props.isBet} id="modal">
                     <Bet betOptions={betOptions} placeBet={props.placeBet} />
                 </Modal>
 
                 {/* {isBet && <Bet betOptions={betOptions} placeBet={props.placeBet} />} */}
-                {hasStarted ? 
+                {props.hasStarted ? 
                     <div> 
                         {players.map((v, i) => {
                             if (v.username !== username){
@@ -98,7 +65,7 @@ const Game = props => {
                         </div>      
                     </div>                   
                 :
-                    <SettingsForm startGame={startGame} username={username} />
+                    <SettingsForm startGame={props.startGame} username={username} />
                 }
             
             </div>
