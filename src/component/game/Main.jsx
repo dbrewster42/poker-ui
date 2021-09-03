@@ -39,7 +39,7 @@ const Main = props => {
         // setIsBet(true)
         console.log("BET OPTIONS", data.betOptions)
         if (data.betOptions.name === username){
-            setBetOptions(data.betOptions)
+            setBet(data.betOptions)
         } else {
             getMyBetOptions();
         }
@@ -49,13 +49,14 @@ const Main = props => {
         console.log("getting my betOptions")
         let betOptions = await Service.getBetOptions(id)
         console.log(betOptions)
-        while (betOptions.name !== username){
+        if (betOptions.name !== username){
             betOptions = await Service.getBetOptions(id);
+            console.log("retrying betOptions retrieval", betOptions)
         }
-        setBetOptions(betOptions)
+        setBet(betOptions)
     }
 
-    const setBetOptions = betOptions => {
+    const setBet = betOptions => {
         setBetOptions(betOptions)
         console.log("Your Bet Options are", betOptions.possibleActions )
         console.log(betOptions.betAmount)
@@ -63,7 +64,7 @@ const Main = props => {
     }
 
     const placeBet = async action => {
-        e.preventDefault();
+        // e.preventDefault();
         setIsBet(false)
         const data = await Service.bet(id, action);
         console.log("Bet Response", data)
@@ -71,7 +72,7 @@ const Main = props => {
         if (data.data.isBet){
             const betOptions = await Service.getBetOptions(id);
             if (betOptions.data.name === username){
-                setBetOptions(betOptions.data)
+                setBet(betOptions.data)
             }
         } 
         // else {

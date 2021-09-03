@@ -27,7 +27,7 @@ const Game = props => {
     const startGame = async (state) => {
         console.log("state", state)
         let body = { username, 
-            displayName : state.name,
+            displayName : state.displayName,
             numberOfPlayers : state.numberOfPlayers,
             fillWithComputerPlayers: state.fillWithComputerPlayers,
             isCustom: state.isCustom,

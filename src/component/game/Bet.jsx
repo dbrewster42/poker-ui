@@ -33,7 +33,7 @@ const Bet = props => {
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[1]} /><br />
                 {possibleActions[2]}<br />
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[2]} /><br />
-               
+                <input className="fields" type="integer" name="betAmount" onChange={handleChange} value={props.betAmount} /><br />
                 <input className="submit" type="submit" value="Submit" />
             </form>
         </div>
