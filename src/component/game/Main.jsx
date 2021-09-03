@@ -19,14 +19,22 @@ const Main = props => {
     const [hand, setHand] = useState([])
     const [betLog, setBetLog] = useState([])
     let players = [];
+    const [showModal, setShowModal] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     const deal = async (e) => {
         e.preventDefault();
         console.log("dealing")
-        const data = await Service.deal(id);
-        console.log(data)
-        console.log("Dealt", data.data)
-        setCards(data.data)
+        try {
+            const data = await Service.deal(id);
+            console.log(data)
+            console.log("Dealt", data.data)
+            setCards(data.data)
+        } catch (err){
+            console.log(err)
+            setErrorMessage(err.response.data.errMessage)
+            setShowModal(true)
+        }    
         // const betOptions = await Service.getBetOptions(id);
     }
 
@@ -47,13 +55,20 @@ const Main = props => {
 
     const getMyBetOptions = async () => {
         console.log("getting my betOptions")
-        let betOptions = await Service.getBetOptions(id)
-        console.log(betOptions)
-        if (betOptions.name !== username){
-            betOptions = await Service.getBetOptions(id);
-            console.log("retrying betOptions retrieval", betOptions)
+        try {
+            let betOptions = await Service.getBetOptions(id)
+            console.log(betOptions)
+            if (betOptions.name !== username){
+                betOptions = await Service.getBetOptions(id);
+                console.log("retrying betOptions retrieval", betOptions)
+            }
+            setBet(betOptions)
+        } catch (err){
+            console.log(err)
+            setErrorMessage(err.response.data.errMessage)
+            setShowModal(true)
         }
-        setBet(betOptions)
+
     }
 
     const setBet = betOptions => {
@@ -64,32 +79,38 @@ const Main = props => {
     }
 
     const placeBet = async (action, betAmount) => {
-        // e.preventDefault();
         let body = {
             action,
             betAmount,
             username
         }
-        const data = await Service.bet(id, body);
-        setIsBet(false)
-        console.log("Bet Response", data)
-        setBetLog(data.data.bets)
-        if (data.data.isBet){
-            const betOptions = await Service.getBetOptions(id);
-            if (betOptions.data.name === username){
-                setBet(betOptions.data)
+        console.log("Sending bet", body)
+        try {
+            const data = await Service.bet(id, body);
+            setIsBet(false)
+            console.log("Bet Response", data.data)
+            setBetLog(data.data.bets)
+            if (data.data.isBet){
+                const betOptions = await Service.getBetOptions(id);
+                console.log(betOptions.data)
+                if (betOptions.data.name === username){
+                    setBet(betOptions.data)
+                }
             }
-        } 
-        // else {
-        //     //call deal in service?
-        //     //FIXME
-        // }
-        
-        console.log("response", data)
+                // else {
+                //     //call deal in service?
+                //     //FIXME
+                // }
+            //} 
+        } catch (err){
+            console.log(err)
+            setErrorMessage(err.response.data.errMessage)
+            setShowModal(true)
+        }
     }
 
     return ( 
-        <Game setVariables={setVariables} deal={deal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} betLog={betLog} placeBet={placeBet} />
+        <Game setVariables={setVariables} deal={deal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} placeBet={placeBet} />
      );
 }
  

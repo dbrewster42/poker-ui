@@ -42,6 +42,7 @@ const Login = () => {
         } catch (err) {
             console.log(err)
             setErrorMessage(err.response.data.errMessage)
+            setShowModal(true)
         }
 
         //success or failure. boolean or string?
@@ -59,6 +60,7 @@ const Login = () => {
         } catch (err) {
             console.log(err)
             setErrorMessage(err.response.data.errMessage)
+            setShowModal(true)
         }
         setAuth(true)
     }

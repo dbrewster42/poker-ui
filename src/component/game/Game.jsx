@@ -70,6 +70,12 @@ const Game = props => {
             </div>
 
             <div id="table">
+                <Modal isOpen={props.showModal} id="modal"><h2>{props.errorMessage}</h2></Modal>
+                <Modal isOpen={isBet} id="modal">
+                    <Bet betOptions={betOptions} placeBet={props.placeBet} />
+                </Modal>
+
+                {/* {isBet && <Bet betOptions={betOptions} placeBet={props.placeBet} />} */}
                 {hasStarted ? 
                     <div> 
                         {players.map((v, i) => {
@@ -94,7 +100,7 @@ const Game = props => {
                 :
                     <SettingsForm startGame={startGame} username={username} />
                 }
-                {isBet && <Bet betOptions={betOptions} username={username} placeBet={props.placeBet} />}
+            
             </div>
 
             

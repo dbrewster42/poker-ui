@@ -26,19 +26,25 @@ const Bet = props => {
 
 
     return ( 
-        <div id="form">
+        <div id="betForm">
             <p>
                 Current Pot : {props.betOptions.pot}$ <br />
                 Minimum Bet : {props.betOptions.betAmount}$
             </p>
             
             <form onSubmit={(e) => beginBet(e)}>
-                {possibleActions[0]}
+                <label>{possibleActions[0]}</label>
+                <input type="radio" name="action" onChange={handleChange} value={possibleActions[0]} />
+                <label>{possibleActions[1]}</label>
+                <input type="radio" name="action" onChange={handleChange} value={possibleActions[1]} />
+                <label>{possibleActions[2]}</label>
+                <input type="radio" name="action" onChange={handleChange} value={possibleActions[2]} /><br />
+                {/* {possibleActions[0]}
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[0]} /><br />
                 {possibleActions[1]}
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[1]} /><br />
                 {possibleActions[2]}
-                <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[2]} /><br />
+                <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[2]} /><br /> */}
                 <input className="fields" type="integer" name="betAmount" onChange={handleAmountChange} value={betAmount} /><br />
                 <input className="submit" type="submit" value="Submit" />
             </form>
