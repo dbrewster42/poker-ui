@@ -33,12 +33,12 @@ const Bet = props => {
             </p>
             
             <form onSubmit={(e) => beginBet(e)}>
-                <label>{possibleActions[0]}</label>
-                <input type="radio" name="action" onChange={handleChange} value={possibleActions[0]} />
-                <label>{possibleActions[1]}</label>
-                <input type="radio" name="action" onChange={handleChange} value={possibleActions[1]} />
-                <label>{possibleActions[2]}</label>
-                <input type="radio" name="action" onChange={handleChange} value={possibleActions[2]} /><br />
+                <label className="betLabels">{possibleActions[0]}</label>
+                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[0]} /><br />
+                <label className="betLabels">{possibleActions[1]}</label>
+                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[1]} /><br />
+                <label className="betLabels">{possibleActions[2]}</label>
+                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[2]} /><br />
                 {/* {possibleActions[0]}
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[0]} /><br />
                 {possibleActions[1]}

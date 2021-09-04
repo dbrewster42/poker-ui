@@ -6,7 +6,7 @@ import Service from "../../service/Service"
 const Main = props => {
     let username;
     console.log(props.location)
-    if (props.location.state !== undefined){
+    if (username === undefined && props.location.state !== undefined){
         console.log("setting username", props.location.state)
         username = props.location.state.username
     }
@@ -15,10 +15,10 @@ const Main = props => {
     let [hasStarted, setHasStarted] = useState(false);
     let [id, setId] = useState(0);
     // const [players, setPlayers] = useState([])
+        let players = [];
     const [cards, setCards] = useState([])
     const [hand, setHand] = useState([])
     const [betLog, setBetLog] = useState([])
-    let players = [];
     const [showModal, setShowModal] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
 
@@ -63,12 +63,12 @@ const Main = props => {
                 setShowModal(false)
             }, (2500))
         }
-
     }
 
     const setVariables= data => {
         setHasStarted(true)
         setId(data.gameId)
+        // setPlayers(data.users)
         players = data.users
         // setPlayers([...data.users])
         setHand(data.hand)
@@ -76,24 +76,26 @@ const Main = props => {
         console.log("BET OPTIONS", data.betOptions)
         if (data.betOptions.name === username){
             setBet(data.betOptions)
-        } else {
-            getMyBetOptions();
-        }
+        } 
+        // else {
+        //     getMyBetOptions();
+        // }
     }
 
-    const getMyBetOptions = async () => {
+    const getMyBetOptions = async e => {
+        e.preventDefault()
         console.log("getting my betOptions")
         try {
-            let betOptions = await Service.getBetOptions(id)
-            console.log(betOptions)
-            if (betOptions.name !== username){
-                betOptions = await Service.getBetOptions(id);
-                console.log("retrying betOptions retrieval", betOptions)
+            let data = await Service.getBetOptions(id)
+            console.log(data.data)
+            if (data.data.name !== username){
+                data = await Service.getBetOptions(id);
+                console.log("retrying betOptions retrieval", data.data)
             }
-            setBet(betOptions)
+            setBet(data.data.betOptions)
         } catch (err){
             console.log(err)
-            setErrorMessage(err.response.data.errMessage)
+            // setErrorMessage(err.response.data.errMessage)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -120,17 +122,18 @@ const Main = props => {
             const data = await Service.bet(id, body);
             setIsBet(false)
             console.log("Bet Response", data.data)
-            setBetLog(data.data.bets)
+            setBetLog(data.data.messages)
             if (data.data.isBet){
                 const betOptions = await Service.getBetOptions(id);
                 console.log(betOptions.data)
                 if (betOptions.data.name === username){
                     setBet(betOptions.data)
+                } else {
+                    throw Error("It should be the human's turn to bet")
                 }
             }
                 // else {
                 //     //call deal in service?
-                //     //FIXME
                 // }
             //} 
         } catch (err){
@@ -146,7 +149,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game startGame={startGame} deal={deal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} placeBet={placeBet} />
+        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} />
      );
 }
  

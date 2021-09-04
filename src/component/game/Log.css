@@ -1,11 +1,13 @@
-#log {
+/* #log {
     border: 2px solid royalblue;
-    width: 90%;
+    width: 100%;
+    height: 100%;
     margin-left: 5%;
-}
+} */
 #betList {
   overflow: scroll;
-  width: 100%;
+  width: 90%;
+  margin-left: 5%;
   height: 100%;  
   background-color: slategray;
 }

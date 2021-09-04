@@ -5,11 +5,10 @@ const Log = props => {
     return ( 
         <div id="log">
             <ul id="betList">
-                {props.betLog.length > 0 && props.betLog.betMessage.map((bet, i) => {
+                {props.betLog.length > 0 && props.betLog.map((bet, i) => {
                     return <li key={i} className="betMessages">{bet}</li>
                 })}
-            </ul>
-            
+            </ul> 
         </div>
      );
 }
