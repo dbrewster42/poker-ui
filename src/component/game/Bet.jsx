@@ -29,7 +29,7 @@ const Bet = props => {
         <div id="betForm">
             <p>
                 Current Pot : {props.betOptions.pot}$ <br />
-                Minimum Bet : {props.betOptions.betAmount}$
+                Minimum Bet : {betAmount}$
             </p>
             
             <form onSubmit={(e) => beginBet(e)}>

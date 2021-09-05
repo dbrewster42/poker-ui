@@ -9,11 +9,11 @@ import Modal from "react-modal";
 
 
 const Game = props => {
-    let id = props.id;
-    // let players = props.players;
-    console.log("players", props.players)
-    let [players] = useState(props.players)
-    let hand = props.hand;
+    console.log("players", props)
+    let id = props.gameVariables.id;
+    // let [players] = useState(props.players)
+    let players = props.gameVariables.players
+    let hand = props.gameVariables.hand;
     let betOptions = props.betOptions;
     let cards = props.cards
     const [money, setMoney] = useState(0)
@@ -54,7 +54,7 @@ const Game = props => {
                 </Modal>
 
                 {/* {isBet && <Bet betOptions={betOptions} placeBet={props.placeBet} />} */}
-                {props.hasStarted ? 
+                {props.gameVariables.hasStarted ? 
                     <div> 
                         {players.map((v, i) => {
                             if (v.username !== username){

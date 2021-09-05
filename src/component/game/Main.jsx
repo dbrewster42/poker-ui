@@ -4,20 +4,28 @@ import Service from "../../service/Service"
 
 
 const Main = props => {
-    let username;
+    // let username;
+    let [username, setUsername] = useState("")
     console.log(props.location)
-    if (username === undefined && props.location.state !== undefined){
+    if (username === "" && props.location.state !== undefined){
         console.log("setting username", props.location.state)
-        username = props.location.state.username
+        // username = props.location.state.username
+        setUsername(props.location.state.username)
     }
     let [isBet, setIsBet] = useState(false);
     let [betOptions, setBetOptions] = useState();
-    let [hasStarted, setHasStarted] = useState(false);
+    // let [hasStarted, setHasStarted] = useState(false);
     let [id, setId] = useState(0);
     // const [players, setPlayers] = useState([])
-        let players = [];
+    // const [hand, setHand] = useState([])
+
+    const [gameVariables, setGameVariables] = useState({
+        players : [],
+        hand : [],
+        hasStarted : false
+    });
+        // let players = [];
     const [cards, setCards] = useState([])
-    const [hand, setHand] = useState([])
     const [betLog, setBetLog] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
@@ -32,7 +40,7 @@ const Main = props => {
             setCards(data.data)
         } catch (err){
             console.error(err)
-            setErrorMessage(err.response.data.errMessage)
+            setErrorMessage(err.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -57,7 +65,7 @@ const Main = props => {
             setVariables(data.data);
         } catch (err){
             console.error(err)
-            setErrorMessage(err.response.data.errMessage)
+            setErrorMessage(err.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -66,20 +74,24 @@ const Main = props => {
     }
 
     const setVariables= data => {
-        setHasStarted(true)
+        let body = { 
+            hasStarted : true, 
+            players : data.users,
+            hand : data.hand
+        }
+        // setHasStarted(true)
         setId(data.gameId)
         // setPlayers(data.users)
-        players = data.users
+        // setHand(data.hand)
+        console.log("GAMETIME", body)
+        setGameVariables(body);
+        console.log(gameVariables)
+        // players = data.users
         // setPlayers([...data.users])
-        setHand(data.hand)
-        // setIsBet(true)
         console.log("BET OPTIONS", data.betOptions)
         if (data.betOptions.name === username){
             setBet(data.betOptions)
         } 
-        // else {
-        //     getMyBetOptions();
-        // }
     }
 
     const getMyBetOptions = async e => {
@@ -92,10 +104,12 @@ const Main = props => {
                 data = await Service.getBetOptions(id);
                 console.log("retrying betOptions retrieval", data.data)
             }
-            setBet(data.data.betOptions)
+            if (data.data.betActive){
+                setBet(data.data)
+            }
         } catch (err){
             console.log(err)
-            // setErrorMessage(err.response.data.errMessage)
+            setErrorMessage(err.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -106,7 +120,7 @@ const Main = props => {
 
     const setBet = betOptions => {
         setBetOptions(betOptions)
-        console.log("Your Bet Options are", betOptions.possibleActions )
+        console.log("Your Bet Options are", betOptions)
         console.log(betOptions.betAmount)
         setIsBet(true)
     }
@@ -137,10 +151,8 @@ const Main = props => {
                 // }
             //} 
         } catch (err){
-            console.log(err)
-            console.log(err.response)
-            console.log(err.data)
-            setErrorMessage(err.response.data.errMessage)
+            console.error(err)
+            setErrorMessage(err.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -149,7 +161,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} players={players} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} />
+        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} isBet={isBet} betOptions={betOptions} id={id} gameVariables={gameVariables} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} />
      );
 }
  
