@@ -14,17 +14,11 @@ const Main = props => {
     }
     let [isBet, setIsBet] = useState(false);
     let [betOptions, setBetOptions] = useState();
-    // let [hasStarted, setHasStarted] = useState(false);
+    let [hasStarted, setHasStarted] = useState(false);
     let [id, setId] = useState(0);
-    // const [players, setPlayers] = useState([])
-    // const [hand, setHand] = useState([])
-
-    const [gameVariables, setGameVariables] = useState({
-        players : [],
-        hand : [],
-        hasStarted : false
-    });
-        // let players = [];
+    // let players = [];
+    const [players, setPlayers] = useState([])
+    const [hand, setHand] = useState([])
     const [cards, setCards] = useState([])
     const [betLog, setBetLog] = useState([])
     const [showModal, setShowModal] = useState(false)
@@ -76,17 +70,13 @@ const Main = props => {
     const setVariables= data => {
         let body = { 
             hasStarted : true, 
-            players : data.users,
             hand : data.hand
         }
-        // setHasStarted(true)
+        setHasStarted(true)
         setId(data.gameId)
-        // setPlayers(data.users)
-        // setHand(data.hand)
-        console.log("GAMETIME", body)
-        setGameVariables(body);
-        console.log(gameVariables)
-        // players = data.users
+        setHand(data.hand)
+
+        setPlayers(data.users);
         // setPlayers([...data.users])
         console.log("BET OPTIONS", data.betOptions)
         if (data.betOptions.name === username){
@@ -100,12 +90,13 @@ const Main = props => {
         try {
             let data = await Service.getBetOptions(id)
             console.log(data.data)
-            if (data.data.name !== username){
-                data = await Service.getBetOptions(id);
-                console.log("retrying betOptions retrieval", data.data)
-            }
-            if (data.data.betActive){
-                setBet(data.data)
+            setBetLog(data.data.messages)
+            // if (data.data.name !== username){
+            //     data = await Service.getBetOptions(id);
+            //     console.log("retrying betOptions retrieval", data.data)
+            // }
+            if (data.data.betOptions.betActive && data.data.betOptions.name === username){
+                setBet(data.data.betOptions)
             }
         } catch (err){
             console.log(err)
@@ -121,7 +112,6 @@ const Main = props => {
     const setBet = betOptions => {
         setBetOptions(betOptions)
         console.log("Your Bet Options are", betOptions)
-        console.log(betOptions.betAmount)
         setIsBet(true)
     }
 
@@ -161,7 +151,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} isBet={isBet} betOptions={betOptions} id={id} gameVariables={gameVariables} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} />
+        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} />
      );
 }
  

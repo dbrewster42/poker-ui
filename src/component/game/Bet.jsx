@@ -4,7 +4,7 @@ import "./Form.css"
 
 
 const Bet = props => {
-    console.log(props)
+    // console.log(props)
     let [action, setAction] = useState();
     let [betAmount, setBetAmount] = useState(props.betOptions.betAmount);
     let [possibleActions] = useState(props.betOptions.possibleActions)
@@ -17,7 +17,7 @@ const Bet = props => {
 
     const handleChange = e => {
         setAction(e.target.value)
-        console.log(e)
+        console.log(e.target.value)
     }
 
     const handleAmountChange = e => {
@@ -33,12 +33,12 @@ const Bet = props => {
             </p>
             
             <form onSubmit={(e) => beginBet(e)}>
-                <label className="betLabels">{possibleActions[0]}</label>
-                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[0]} /><br />
-                <label className="betLabels">{possibleActions[1]}</label>
-                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[1]} /><br />
-                <label className="betLabels">{possibleActions[2]}</label>
-                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[2]} /><br />
+                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[0]} />
+                <label className="betLabels">{possibleActions[0]}</label><br />
+                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[1]} />
+                <label className="betLabels">{possibleActions[1]}</label><br />
+                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[2]} />
+                <label className="betLabels">{possibleActions[2]}</label><br /><br />
                 {/* {possibleActions[0]}
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[0]} /><br />
                 {possibleActions[1]}

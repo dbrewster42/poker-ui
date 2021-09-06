@@ -9,11 +9,18 @@ import Modal from "react-modal";
 
 
 const Game = props => {
-    console.log("players", props)
-    let id = props.gameVariables.id;
-    // let [players] = useState(props.players)
-    let players = props.gameVariables.players
-    let hand = props.gameVariables.hand;
+    console.log("props", props)
+    let id = props.id;
+    // let players = props.players;
+    let [players, setPlayers] = useState([])
+    let [hasSet, setHasSet] = useState(true)
+    if (props.hasStarted && hasSet){
+        setHasSet(false)
+        console.log("setting players !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", props.players)
+        setPlayers(props.players)
+    }
+    let hand = props.hand;
+    let hasStarted = props.hasStarted;
     let betOptions = props.betOptions;
     let cards = props.cards
     const [money, setMoney] = useState(0)
@@ -22,9 +29,11 @@ const Game = props => {
 
 
     const printData = () => {
+        console.log(props.players)
         console.log(players)
         console.log(id)
         console.log(hand)
+        console.log(hasSet)
     }
 
     const toggleBetModal = () => {
@@ -38,14 +47,14 @@ const Game = props => {
     return ( 
         <div id="background">
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
-            
-            <div>
-                <button onClick={() => printData()}>Check</button>
-                <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
-                <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Bet</button> 
-                {!isMax && <button className="start" onClick={() => setIsMax(true)}>Maximize Bet</button>}
-            </div>
-
+            {hasStarted &&
+                <div>
+                    <button onClick={() => printData()}>Check</button>
+                    <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
+                    <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Bet</button> 
+                    {!isMax && <button className="start" onClick={() => setIsMax(true)}>Maximize Bet</button>}
+                </div>
+            }
             <div id="table">
                 <Modal isOpen={props.showModal} class="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
                 <Modal isOpen={props.isBet && isMax} class="modal" ariaHideApp={false}>
@@ -54,19 +63,18 @@ const Game = props => {
                 </Modal>
 
                 {/* {isBet && <Bet betOptions={betOptions} placeBet={props.placeBet} />} */}
-                {props.gameVariables.hasStarted ? 
+                {hasStarted ? 
                     <div> 
                         {players.map((v, i) => {
                             if (v.username !== username){
                                 return (
                                     <PlayerInfo name={v.username} money={v.money} key={i} class="info" />
-                                    // <PlayerInfo name={v.displayName} money={v.money} key={i} class="info" />
                                 )
                             } else {
                                 setMoney(v.money)
                             }                           
                         })}
-                        {cards.length > 0 && cards.map((v, i) => {
+                        {cards.map((v, i) => {
                             return (
                                 <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
                             )

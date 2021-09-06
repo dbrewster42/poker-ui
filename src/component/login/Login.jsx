@@ -41,7 +41,7 @@ const Login = () => {
             console.log(data.data.body)
         } catch (err) {
             console.log(err)
-            setErrorMessage(err.response.data.errMessage)
+            setErrorMessage(err.message)
             setShowModal(true)
         }
 

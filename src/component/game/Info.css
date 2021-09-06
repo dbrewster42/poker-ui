@@ -1,13 +1,15 @@
-/* .info {
+.info {
     margin: 1%;
     width: 20%;
     height: 30%;
+    padding: 2%;
     border: 1px dashed black;
     border-radius: 10px;
 }
 .my {
     color:  rgb(38, 48, 58);
-} */
+    color: #05F100;
+}
 .cards {
     display: inline-block;
     width: 54px;

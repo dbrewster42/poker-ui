@@ -26,6 +26,8 @@
 }
 
 #betForm {
+    color: #05F100;
+    padding-left: 10%;
     background-color: rgb(60, 73, 87);
     border: 2px solid black;
 }

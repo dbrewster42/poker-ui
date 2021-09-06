@@ -4,7 +4,6 @@ import { useState } from "react";
 const MyInfo = props => {
     const name = useState(props.name);
     const money = useState(props.money);
-    console.log(props)
 
     return ( 
         <div className="my info">
