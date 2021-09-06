@@ -4,19 +4,16 @@ import Service from "../../service/Service"
 
 
 const Main = props => {
-    // let username;
     let [username, setUsername] = useState("")
     console.log(props.location)
     if (username === "" && props.location.state !== undefined){
         console.log("setting username", props.location.state)
-        // username = props.location.state.username
         setUsername(props.location.state.username)
     }
     let [isBet, setIsBet] = useState(false);
     let [betOptions, setBetOptions] = useState();
     let [hasStarted, setHasStarted] = useState(false);
     let [id, setId] = useState(0);
-    // let players = [];
     const [players, setPlayers] = useState([])
     const [hand, setHand] = useState([])
     const [cards, setCards] = useState([])
@@ -68,15 +65,10 @@ const Main = props => {
     }
 
     const setVariables= data => {
-        let body = { 
-            hasStarted : true, 
-            hand : data.hand
-        }
+        setPlayers(data.users);
         setHasStarted(true)
         setId(data.gameId)
         setHand(data.hand)
-
-        setPlayers(data.users);
         // setPlayers([...data.users])
         console.log("BET OPTIONS", data.betOptions)
         if (data.betOptions.name === username){

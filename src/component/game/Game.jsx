@@ -66,22 +66,18 @@ const Game = props => {
                 {hasStarted ? 
                     <div> 
                         {players.map((v, i) => {
-                            if (v.username !== username){
+                            
                                 return (
                                     <PlayerInfo name={v.username} money={v.money} key={i} class="info" />
                                 )
-                            } else {
-                                setMoney(v.money)
-                            }                           
-                        })}
+                                        
+                        })}<br />
                         {cards.map((v, i) => {
                             return (
                                 <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
                             )
-                        })}
-                         <div id="my">
+                        })}<br />
                             <MyInfo name={username} money={money} hand={hand} class="info" /> 
-                        </div>      
                     </div>                   
                 :
                     <SettingsForm startGame={props.startGame} username={username} />
