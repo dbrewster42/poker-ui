@@ -11,7 +11,6 @@ const MyInfo = props => {
                     <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[1].image} alt="card" />
                 </div>
             }           
-       
         </div>
      );
 }

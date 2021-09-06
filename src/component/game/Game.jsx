@@ -11,21 +11,21 @@ import Modal from "react-modal";
 const Game = props => {
     console.log("props", props)
     let id = props.id;
-    // let players = props.players;
-    let [players, setPlayers] = useState([])
-    let [hasSet, setHasSet] = useState(true)
-    if (props.hasStarted && hasSet){
-        setHasSet(false)
-        console.log("setting players !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", props.players)
-        setPlayers(props.players)
-    }
+    // let [players, setPlayers] = useState([])
+    // let [hasSet, setHasSet] = useState(true)
+    // if (props.hasStarted && hasSet){
+    //     setHasSet(false)
+    //     console.log("setting players !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", props.players)
+    //     setPlayers(props.players)
+    // }
+    let players = props.players;
     let hand = props.hand;
     let hasStarted = props.hasStarted;
     let betOptions = props.betOptions;
     let cards = props.cards
     const [money, setMoney] = useState(0)
     const username = props.username;
-    const [isMax, setIsMax] = useState(true)
+    const [isMax, setIsMax] = useState(false)
 
 
     const printData = () => {
@@ -51,8 +51,8 @@ const Game = props => {
                 <div>
                     <button onClick={() => printData()}>Check</button>
                     <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
-                    <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Bet</button> 
-                    {!isMax && <button className="start" onClick={() => setIsMax(true)}>Maximize Bet</button>}
+                    <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
+                    {!isMax && <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>}
                 </div>
             }
             <div id="table">
@@ -66,11 +66,9 @@ const Game = props => {
                 {hasStarted ? 
                     <div> 
                         {players.map((v, i) => {
-                            
                                 return (
                                     <PlayerInfo name={v.username} money={v.money} key={i} class="info" />
-                                )
-                                        
+                                ) 
                         })}<br />
                         {cards.map((v, i) => {
                             return (
