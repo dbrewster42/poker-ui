@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from "./component/login/Login";
-import Game from "./component/game/Game";
+import Main from "./component/game/Main";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Switch>
              <Route exact path="/" component={Login} />
-             <Route path="/game" component={Game} />
+             <Route path="/game" component={Main} />
         </Switch>
        
       </BrowserRouter>

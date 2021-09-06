@@ -1,17 +1,13 @@
 import "./Info.css"
-import { useState } from "react";
 
 const PlayerInfo = props => {
-    const name = useState(props.name);
-    const money = useState(props.money);
-    console.log(props)
 
     return ( 
-        <div className="info">
-           <h4>{name}</h4> {money}$
+        <div className="my info">
+           <h4>{props.name}</h4> {props.money}$
             <div>          
-               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} />
-               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} />
+               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
+               <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
             </div>                    
         </div>
      );

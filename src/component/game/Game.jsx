@@ -1,97 +1,43 @@
 import "./Game.css"
-import Service from "../../service/Service"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
 import MyInfo from "./MyInfo"
 import Bet from "./Bet"
+import Log from "./Log"
+import Modal from "react-modal";
 
-// function importAll(r) {
-//     let images = {};
-//     r.keys().forEach((item) => {        
-//         images[item.replace("./", "")] = r(item);
-//     });
-//     console.log(images);
-//     return images;
-//   }
 
 const Game = props => {
-    // console.log(props)
-    let [hasStarted, setHasStarted] = useState(false);
-    let [hasDealt, setHasDealt] = useState(false);
-    let [id, setId] = useState(0);
-    const [players, setPlayers] = useState([])
-    const [cards, setCards] = useState([])
-    const [hand, setHand] = useState([])
+    console.log("props", props)
+    let id = props.id;
+    // let [players, setPlayers] = useState([])
+    // let [hasSet, setHasSet] = useState(true)
+    // if (props.hasStarted && hasSet){
+    //     setHasSet(false)
+    //     console.log("setting players !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", props.players)
+    //     setPlayers(props.players)
+    // }
+    let players = props.players;
+    let hand = props.hand;
+    let hasStarted = props.hasStarted;
+    let betOptions = props.betOptions;
+    let cards = props.cards
     const [money, setMoney] = useState(0)
-    let [turn, setTurn] = useState(0);
-    let [isBet, setIsBet] = useState(false);
-    let [betOptions, setBetOptions] = useState();
-    const [betLog, setBetLog] = useState([]);
-    // const [names, setNames] = useState([])
-    // let [body, setBody] = useState({});
-    const username = props.location.state.username;
-    // console.log(username)
-    
-    // const images = importAll(require.context("../../../public/pics/PNG", false, /\.(pn?g)$/));
-    // const image = images["red_back.png"]
+    const username = props.username;
+    const [isMax, setIsMax] = useState(false)
 
-    const startGame = async (state) => {
-        // let displayName = state.displayName;
-        // let numberOfPlayers = state.numberOfPlayers;
-        // let fillWithComputerPlayers = state.hasComputers;
-        // let isCustom = state.isCustom;
-        let body = { username, 
-            displayName : state.numberOfPlayers,
-            numberOfPlayers : state.numberOfPlayers,
-            fillWithComputerPlayers: state.fillWithComputerPlayers,
-            isCustom: state.isCustom,
-            bigBlind: state.bigBlind
-         }
-        console.log("request", body)
-        const data = await Service.startGame(body);
-        console.log("response", data)
-        console.log("response body", data.data)
-        setHasStarted(true)
-        setId(data.data.gameId)
-        setPlayers(data.data.users)
-        setHand(data.data.hand)
-        setBetOptions(data.data.betOptions)
-        setIsBet(true)
-        // if (data.data.betOptions.name == username){
-        //     displayBetOptions(data.data.betOptions);
-        // }
-        // setNames(players.keys())
-    }
 
-    const deal = async (e) => {
-        e.preventDefault();
-        console.log("hi")
-        // let body = { username }
-        const data = await Service.deal(id);
-        console.log(data)
-        console.log("Dealt", data.data)
-    }
     const printData = () => {
+        console.log(props.players)
         console.log(players)
         console.log(id)
         console.log(hand)
+        console.log(hasSet)
     }
 
-    const displayBetOptions = betOptions => {
-        console.log("Your Bet Options are", betOptions.possibleActions )
-        console.log(betOptions.betAmount)
-    }
-
-    const placeBet = action => {
-        const data = await Service.bet(id, action);
-        if (data.data.isBet){
-            setBetOptions(data.data.betOptions)
-        } else {
-            setIsBet(false)
-        }
-        
-        console.log("response", data)
+    const toggleBetModal = () => {
+        setIsMax(false)
     }
 
     // useEffect(() => {
@@ -101,46 +47,45 @@ const Game = props => {
     return ( 
         <div id="background">
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
-            
-            <div>
-                <button onClick={printData}>Check</button>
-                <button id="start" onClick={deal}>Deal</button> 
-            </div>
-
+            {hasStarted &&
+                <div>
+                    <button onClick={() => printData()}>Check</button>
+                    <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
+                    <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
+                    {!isMax && <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>}
+                </div>
+            }
             <div id="table">
+                <Modal isOpen={props.showModal} class="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
+                <Modal isOpen={props.isBet && isMax} class="modal" ariaHideApp={false}>
+                    <Bet betOptions={betOptions} placeBet={props.placeBet} />
+                    <button onClick={() => toggleBetModal()}>Minimize</button>
+                </Modal>
+
+                {/* {isBet && <Bet betOptions={betOptions} placeBet={props.placeBet} />} */}
                 {hasStarted ? 
                     <div> 
                         {players.map((v, i) => {
-                            if (v.username !== username){
                                 return (
                                     <PlayerInfo name={v.username} money={v.money} key={i} class="info" />
-                                    // <PlayerInfo name={v.displayName} money={v.money} key={i} class="info" />
-                                )
-                            } else {
-                                setMoney(v.money)
-                            }                           
-                        })}
-                        {cards.length > 0 && cards.map((v, i) => {
+                                ) 
+                        })}<br />
+                        {cards.map((v, i) => {
                             return (
-                                <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} />
+                                <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
                             )
-                        })}
-                         <div id="my">
+                        })}<br />
                             <MyInfo name={username} money={money} hand={hand} class="info" /> 
-                        </div>      
                     </div>                   
                 :
-                    <SettingsForm startGame={startGame} username={username} />
+                    <SettingsForm startGame={props.startGame} username={username} />
                 }
-                  
+            
             </div>
-            {/* {isBet && <Bet id={id} betOptions={betOptions} username={username} setIsBet={setIsBet} />} */}
-            {isBet && <Bet betOptions={betOptions} username={username} />}
-            {/* {images.map((image, i) => {
-                return (
-                    <img src={image} className="cards" />
-                )
-            })} */}
+
+            
+            <Log betLog={props.betLog} />
+
         </div>
      );
 }

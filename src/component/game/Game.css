@@ -15,7 +15,7 @@
 #table {
     /* background-image: url("../../images/green.jpg"); */
     background-color: seagreen;
-    border: 15px solid saddlebrown;
+    border: 20px solid saddlebrown;
     border-radius: 20px;
     width: 80%;
     height: 700px;
@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: column;
 }
-#start {
+.start {
     width: 18%;
     height: 60px;
     padding: 10px;
@@ -75,9 +75,9 @@
     justify-content: space-evenly;
     flex-direction: column;
 }
-#my {
+/* #my {
     margin-top: 17%;
-}
+} */
 /* #info {
     width: 22%;
     height: 27%;
@@ -86,3 +86,10 @@
     background-color: rgb(38, 48, 58);
     color: #05F100;
 } */
+.modal {
+    background-color: rgb(38, 48, 58);
+    color: #05F100;
+    margin: auto;
+    width: 450px;
+    height: 200px;
+}

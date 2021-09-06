@@ -41,7 +41,8 @@ const Login = () => {
             console.log(data.data.body)
         } catch (err) {
             console.log(err)
-            setErrorMessage(err.response.data.errMessage)
+            setErrorMessage(err.message)
+            setShowModal(true)
         }
 
         //success or failure. boolean or string?
@@ -57,8 +58,13 @@ const Login = () => {
             const data = await Service.signIn(body)
             console.log(data.data)
         } catch (err) {
-            console.log(err)
-            setErrorMessage(err.response.data.errMessage)
+            console.error(err)
+            console.error(err.message)
+            setErrorMessage(err.message)
+            setShowModal(true)
+            setTimeout(function(){
+                setShowModal(false)
+            }, (2500))
         }
         setAuth(true)
     }
@@ -73,7 +79,7 @@ const Login = () => {
     return ( 
         <div id="parent">
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
-            <Modal isOpen={showModal} id="modal"><h2>{errorMessage}</h2></Modal>
+            <Modal isOpen={showModal} id="modal" ariaHideApp={false}><h2>{errorMessage}</h2></Modal>
             <h2>Would You Like To Play A Game?</h2>
             {/* {isAuth && <button id="start"><Link to="/game">Start A Game</Link></button>} */}
             {isAuth ?

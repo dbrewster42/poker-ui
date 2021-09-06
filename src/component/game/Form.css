@@ -24,3 +24,16 @@
     margin-left: 25%;
     margin-top: 6%;
 }
+
+#betForm {
+    color: #05F100;
+    padding-left: 10%;
+    background-color: rgb(60, 73, 87);
+    border: 2px solid black;
+}
+
+.betLabels {
+    width: 30px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
