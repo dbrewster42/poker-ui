@@ -38,6 +38,9 @@ class Service {
     bet(gameId, body){
         return axios.post(`${url}/game/${gameId}/bet`, body, headers)
     }
+    calculateWinner(gameId){
+        return axios.get(`${url}/game/${gameId}/winner`, headers)
+    }
 }
 export default new Service();
 

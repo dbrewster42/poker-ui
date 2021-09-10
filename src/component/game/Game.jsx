@@ -33,7 +33,7 @@ const Game = props => {
         console.log(players)
         console.log(id)
         console.log(hand)
-        console.log(hasSet)
+        console.log(isMax)
     }
 
     const toggleBetModal = () => {
@@ -52,6 +52,7 @@ const Game = props => {
                     <button onClick={() => printData()}>Check</button>
                     <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
                     <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
+                    <button className="start" onClick={(e) => props.calculateWinner(e)}>Get Winner</button> 
                     {!isMax && <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>}
                 </div>
             }

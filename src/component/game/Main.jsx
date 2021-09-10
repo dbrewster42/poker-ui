@@ -125,7 +125,7 @@ const Main = props => {
                 if (betOptions.data.name === username){
                     setBet(betOptions.data)
                 } else {
-                    throw Error("It should be the human's turn to bet")
+                    throw Error("It should be the user's turn to bet")
                 }
             }
                 // else {
@@ -142,8 +142,25 @@ const Main = props => {
         }
     }
 
+    const calculateWinner = async (e) => {
+        e.preventDefault();
+        console.log("getting winner")
+        try {
+            const data = await Service.calculateWinner(id);
+            console.log(data)
+            console.log("WINNER", data.data)
+        } catch (err){
+            console.error(err)
+            setErrorMessage(err.message)
+            setShowModal(true)
+            setTimeout(function(){
+                setShowModal(false)
+            }, (2500))
+        }    
+    }
+
     return ( 
-        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} />
+        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} />
      );
 }
  
