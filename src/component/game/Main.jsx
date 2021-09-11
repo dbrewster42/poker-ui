@@ -29,6 +29,7 @@ const Main = props => {
             console.log(data)
             console.log("Dealt", data.data)
             setCards(data.data)
+            setIsBet(true)
         } catch (err){
             console.error(err)
             setErrorMessage(err.message)

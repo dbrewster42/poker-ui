@@ -1,6 +1,7 @@
 /* import backgroundImage from "../public/green.jpg" */
 #header {
-    color: red;
+    color: #05F100;
+    font-family: 'Share Tech Mono', monospace;
     font-size: 300%;
 }
 #background {
@@ -17,12 +18,15 @@
     background-color: seagreen;
     border: 20px solid saddlebrown;
     border-radius: 20px;
-    width: 80%;
-    height: 700px;
-    margin-left: 10%;
+    width: 84%;
+    height: 620x;
+    margin-left: 8%;
     margin-top: 3%;
     display: flex;
     flex-direction: column;
+}
+#riverCards {
+    margin: 10%;
 }
 .start {
     width: 18%;

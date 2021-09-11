@@ -11,13 +11,6 @@ import Modal from "react-modal";
 const Game = props => {
     console.log("props", props)
     let id = props.id;
-    // let [players, setPlayers] = useState([])
-    // let [hasSet, setHasSet] = useState(true)
-    // if (props.hasStarted && hasSet){
-    //     setHasSet(false)
-    //     console.log("setting players !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", props.players)
-    //     setPlayers(props.players)
-    // }
     let players = props.players;
     let hand = props.hand;
     let hasStarted = props.hasStarted;
@@ -29,7 +22,6 @@ const Game = props => {
 
 
     const printData = () => {
-        console.log(props.players)
         console.log(players)
         console.log(id)
         console.log(hand)
@@ -50,10 +42,18 @@ const Game = props => {
             {hasStarted &&
                 <div>
                     <button onClick={() => printData()}>Check</button>
-                    <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
-                    <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
                     <button className="start" onClick={(e) => props.calculateWinner(e)}>Get Winner</button> 
-                    {!isMax && <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>}
+                    {props.isBet ?
+                        <div>
+                            {betOptions.name === username ?
+                                <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>
+                            :
+                                <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button>
+                            }                              
+                        </div>
+                    :
+                        <button className="start" onClick={(e) => props.deal(e)}>Deal</button>                  
+                    }
                 </div>
             }
             <div id="table">
@@ -71,12 +71,14 @@ const Game = props => {
                                     <PlayerInfo name={v.username} money={v.money} key={i} class="info" />
                                 ) 
                         })}<br />
-                        {cards.map((v, i) => {
-                            return (
-                                <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
-                            )
-                        })}<br />
-                            <MyInfo name={username} money={money} hand={hand} class="info" /> 
+                        <div id="riverCards">
+                            {cards.map((v, i) => {
+                                return (
+                                    <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
+                                )
+                            })}<br />
+                        </div>
+                        <MyInfo name={username} money={money} hand={hand} class="info" /> 
                     </div>                   
                 :
                     <SettingsForm startGame={props.startGame} username={username} />
@@ -86,7 +88,9 @@ const Game = props => {
 
             
             <Log betLog={props.betLog} />
-
+            <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
+            <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
+            <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>
         </div>
      );
 }
