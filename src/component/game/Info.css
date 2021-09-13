@@ -1,10 +1,23 @@
-.info {
+/* .info {
     margin: 1%;
     width: 20%;
     height: 30%;
     padding: 1%;
     border: 1px dashed black;
     border-radius: 10px;
+} */
+.info {
+    margin: 1%;
+    width: 15%;
+    height: 25%;
+    padding: 5px;
+    border: 1px dashed black;
+    border-radius: 10px;
+    background-color: rgb(38, 48, 58);
+    color: #05F100;
+    display: inline-flex;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 .my {
     color:  rgb(38, 48, 58);

@@ -1,5 +1,4 @@
 import "./Game.css"
-import { useState } from "react";
 import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
 import MyInfo from "./MyInfo"
@@ -17,23 +16,14 @@ const Game = props => {
     let betOptions = props.betOptions;
     let cards = props.cards
     const username = props.username;
-    const [isMax, setIsMax] = useState(false)
 
 
     const printData = () => {
         console.log(players)
         console.log(id)
         console.log(hand)
-        console.log(isMax)
+        console.log(props.isMax)
     }
-
-    const toggleBetModal = () => {
-        setIsMax(false)
-    }
-
-    // useEffect(() => {
-
-    // }, [])
 
     return ( 
         <div id="background">
@@ -43,7 +33,7 @@ const Game = props => {
                     {props.isBet ?
                         <div>
                             {betOptions.name === username ?
-                                <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>
+                                <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
                             :
                                 <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button>
                             }                              
@@ -55,9 +45,9 @@ const Game = props => {
             }
             <div id="table">
                 <Modal isOpen={props.showModal} class="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
-                <Modal isOpen={props.isBet && isMax} class="modal" ariaHideApp={false}>
+                <Modal isOpen={props.isBet && props.isMax} class="modal" ariaHideApp={false}>
                     <Bet betOptions={betOptions} placeBet={props.placeBet} />
-                    <button onClick={() => toggleBetModal()}>Minimize</button>
+                    <button onClick={() => props.toggleBetModal(false)}>Minimize</button>
                 </Modal>
 
                 {/* {isBet && <Bet betOptions={betOptions} placeBet={props.placeBet} />} */}
@@ -65,7 +55,7 @@ const Game = props => {
                     <div> 
                         {players.map((v, i) => {
                                 return (
-                                    <PlayerInfo name={v.username} money={v.money} key={i} class="info" />
+                                    <PlayerInfo name={v.username} money={v.money} key={i}  />
                                 ) 
                         })}<br />
                         <div id="riverCards">
@@ -75,7 +65,7 @@ const Game = props => {
                                 )
                             })}<br />
                         </div>
-                        <MyInfo name={username} money={props.money} hand={hand} class="info" /> 
+                        <MyInfo name={username} money={props.money} hand={hand}  /> 
                     </div>                   
                 :
                     <SettingsForm startGame={props.startGame} username={username} />
@@ -87,7 +77,7 @@ const Game = props => {
             
             <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
             <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
-            <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>
+            <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
             <button onClick={() => printData()}>Check</button>
             <button className="start" onClick={(e) => props.calculateWinner(e)}>Get Winner</button> 
         </div>

@@ -21,6 +21,11 @@ const Main = props => {
     const [betLog, setBetLog] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
+    const [isMax, setIsMax] = useState(false)
+
+    const toggleBetModal = e => {
+        setIsMax(e)
+    }
 
     const deal = async (e) => {
         e.preventDefault();
@@ -30,7 +35,8 @@ const Main = props => {
             console.log(data)
             console.log("Dealt", data.data)
             setCards(data.data)
-            setIsBet(true)
+            // setIsBet(true)
+            // setIsMax(false)
         } catch (err){
             console.error(err)
             setErrorMessage(err.message)
@@ -128,7 +134,7 @@ const Main = props => {
         console.log("Sending bet", body)
         try {
             const data = await Service.bet(id, body);
-            setIsBet(false)
+            setIsMax(false)
             console.log("Bet Response", data.data)
             setBetLog(data.data.messages)
             if (data.data.isBet){
@@ -139,6 +145,8 @@ const Main = props => {
                 } else {
                     throw Error("It should be the user's turn to bet")
                 }
+            } else {
+                setIsBet(false)
             }
                 // else {
                 //     //call deal in service?
@@ -172,7 +180,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} />
+        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} />
      );
 }
  
