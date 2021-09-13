@@ -10,6 +10,7 @@ const Main = props => {
         console.log("setting username", props.location.state)
         setUsername(props.location.state.username)
     }
+    const [money, setMoney] = useState(0)
     let [isBet, setIsBet] = useState(false);
     let [betOptions, setBetOptions] = useState();
     let [hasStarted, setHasStarted] = useState(false);
@@ -65,17 +66,27 @@ const Main = props => {
         }
     }
 
-    const setVariables= data => {
+    const setVariables = data => {
         setPlayers(data.users);
         setHasStarted(true)
         setId(data.gameId)
         setHand(data.hand)
+        // setUserMoney(data.users)
+        setMoney(data.userMoney)
         // setPlayers([...data.users])
         console.log("BET OPTIONS", data.betOptions)
         if (data.betOptions.name === username){
             setBet(data.betOptions)
         } 
     }
+
+    // const setUserMoney = players => {
+    //     for (let i = 0; i < players.length; i++){
+    //         if (players.get(i).username === username){
+    //             setMoney(players.get(i).money)
+    //         }
+    //     }
+    // }
 
     const getMyBetOptions = async e => {
         e.preventDefault()
@@ -161,7 +172,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} />
+        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} />
      );
 }
  

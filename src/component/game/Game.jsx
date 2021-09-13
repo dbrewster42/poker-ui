@@ -16,7 +16,6 @@ const Game = props => {
     let hasStarted = props.hasStarted;
     let betOptions = props.betOptions;
     let cards = props.cards
-    const [money, setMoney] = useState(0)
     const username = props.username;
     const [isMax, setIsMax] = useState(false)
 
@@ -41,8 +40,6 @@ const Game = props => {
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
             {hasStarted &&
                 <div>
-                    <button onClick={() => printData()}>Check</button>
-                    <button className="start" onClick={(e) => props.calculateWinner(e)}>Get Winner</button> 
                     {props.isBet ?
                         <div>
                             {betOptions.name === username ?
@@ -78,7 +75,7 @@ const Game = props => {
                                 )
                             })}<br />
                         </div>
-                        <MyInfo name={username} money={money} hand={hand} class="info" /> 
+                        <MyInfo name={username} money={props.money} hand={hand} class="info" /> 
                     </div>                   
                 :
                     <SettingsForm startGame={props.startGame} username={username} />
@@ -86,11 +83,13 @@ const Game = props => {
             
             </div>
 
+            {props.betLog.length > 0 && <Log betLog={props.betLog} />}        
             
-            <Log betLog={props.betLog} />
             <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
             <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
             <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>
+            <button onClick={() => printData()}>Check</button>
+            <button className="start" onClick={(e) => props.calculateWinner(e)}>Get Winner</button> 
         </div>
      );
 }
