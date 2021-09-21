@@ -5,7 +5,7 @@ const PlayerInfo = props => {
     return ( 
         <div className="my info">
            <h4>{props.name}</h4> {props.money}$
-           {props.isOver ?
+           {!props.isOver || props.hand == undefined ?
                 <div>          
                 <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
                 <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />

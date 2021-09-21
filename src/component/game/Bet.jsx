@@ -18,7 +18,7 @@ const Bet = props => {
 
     const handleChange = e => {
         setAction(e.target.value)
-        if (e.target.value == "RAISE" || e.target.value == "BET"){
+        if (e.target.value === "RAISE" || e.target.value === "BET"){
             setIsNeeded(true)
         } else {
             setIsNeeded(false)

@@ -43,12 +43,15 @@ const Game = props => {
                     :
                         <button className="start" onClick={(e) => props.deal(e)}>Deal</button>                  
                     }
+                    {props.isOver && 
+                        <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>        
+                    }
                 </div>
             }
             <div id="table">
                 <Modal isOpen={props.isOver && showMessage} class="modal" ariaHideApp={false}>
                     <h2>{props.endGameMessage}</h2>
-                    <button onClick={setShowMessage(false)}>Okay</button>
+                    <button onClick={() => setShowMessage(false)}>Okay</button>
                 </Modal>
 
                 <Modal isOpen={props.showModal} class="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>

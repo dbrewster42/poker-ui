@@ -23,6 +23,9 @@ class Service {
     startGame(body){
         return axios.post(`${url}/game`, body, headers)
     }
+    getNewRound(gameId, body){
+        return axios.get(`${url}/game/${gameId}/restart`, body, headers)
+    }
     // newDeal(gameId){
     //     return axios.get(`${url}/game/${gameId}/new-deal`, headers)
     // }
