@@ -1,4 +1,5 @@
 import "./Game.css"
+import { useState } from "react";
 import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
 import MyInfo from "./MyInfo"
@@ -16,6 +17,7 @@ const Game = props => {
     let betOptions = props.betOptions;
     let cards = props.cards
     const username = props.username;
+    const [showMessage, setShowMessage] = useState(true);
 
 
     const printData = () => {
@@ -44,7 +46,13 @@ const Game = props => {
                 </div>
             }
             <div id="table">
+                <Modal isOpen={props.isOver && showMessage} class="modal" ariaHideApp={false}>
+                    <h2>{props.endGameMessage}</h2>
+                    <button onClick={setShowMessage(false)}>Okay</button>
+                </Modal>
+
                 <Modal isOpen={props.showModal} class="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
+
                 <Modal isOpen={props.isBet && props.isMax} class="modal" ariaHideApp={false}>
                     <Bet betOptions={betOptions} placeBet={props.placeBet} />
                     <button onClick={() => props.toggleBetModal(false)}>Minimize</button>
@@ -55,7 +63,7 @@ const Game = props => {
                     <div> 
                         {players.map((v, i) => {
                                 return (
-                                    <PlayerInfo name={v.username} money={v.money} key={i}  />
+                                    <PlayerInfo name={v.username} money={v.money} key={i} isOver={props.isOver} hand={v.cards}  />
                                 ) 
                         })}<br />
                         <div id="riverCards">

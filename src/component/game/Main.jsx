@@ -22,30 +22,11 @@ const Main = props => {
     const [showModal, setShowModal] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [isMax, setIsMax] = useState(false)
+    const [isOver, setIsOver] = useState(false)
+    const [endGameMessage, setEndGameMessage] = useState("")
 
     const toggleBetModal = e => {
         setIsMax(e)
-    }
-
-    const deal = async (e) => {
-        e.preventDefault();
-        console.log("dealing")
-        try {
-            const data = await Service.deal(id);
-            console.log(data)
-            console.log("Dealt", data.data)
-            setCards(data.data)
-            // setIsBet(true)
-            // setIsMax(false)
-        } catch (err){
-            console.error(err)
-            setErrorMessage(err.message)
-            setShowModal(true)
-            setTimeout(function(){
-                setShowModal(false)
-            }, (2500))
-        }    
-        // const betOptions = await Service.getBetOptions(id);
     }
 
     const startGame = async (state) => {
@@ -86,13 +67,26 @@ const Main = props => {
         } 
     }
 
-    // const setUserMoney = players => {
-    //     for (let i = 0; i < players.length; i++){
-    //         if (players.get(i).username === username){
-    //             setMoney(players.get(i).money)
-    //         }
-    //     }
-    // }
+    const deal = async (e) => {
+        e.preventDefault();
+        console.log("dealing")
+        try {
+            const data = await Service.deal(id);
+            console.log(data)
+            console.log("Dealt", data.data)
+            setCards(data.data)
+            // setIsBet(true)
+            // setIsMax(false)
+        } catch (err){
+            console.error(err)
+            setErrorMessage(err.message)
+            setShowModal(true)
+            setTimeout(function(){
+                setShowModal(false)
+            }, (2500))
+        }    
+        // const betOptions = await Service.getBetOptions(id);
+    }
 
     const getMyBetOptions = async e => {
         e.preventDefault()
@@ -167,8 +161,9 @@ const Main = props => {
         console.log("getting winner")
         try {
             const data = await Service.calculateWinner(id);
-            console.log(data)
             console.log("WINNER", data.data)
+            generateBetMessage(data.data)
+            setIsOver(true)
         } catch (err){
             console.error(err)
             setErrorMessage(err.message)
@@ -179,8 +174,12 @@ const Main = props => {
         }    
     }
 
+    const generateBetMessage = data => {
+        
+    }
+
     return ( 
-        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} />
+        <Game startGame={startGame} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} />
      );
 }
  
