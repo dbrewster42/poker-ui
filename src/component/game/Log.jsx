@@ -1,7 +1,6 @@
 import "./Log.css"
 
 const Log = props => {
-    console.log(props)
     return ( 
         <div id="log">
             <ul id="betList">

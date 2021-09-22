@@ -5,7 +5,6 @@ import Service from "../../service/Service"
 
 const Main = props => {
     let [username, setUsername] = useState("")
-    console.log(props.location)
     if (username === "" && props.location.state !== undefined){
         console.log("setting username", props.location.state)
         setUsername(props.location.state.username)
@@ -160,9 +159,9 @@ const Main = props => {
             setIsMyTurn(false)
             console.log("Bet Response", data.data)
             setBetLog(data.data.messages)
-            if (data.data.isBet){
+            if (data.data.bet){
                 const betOptions = await Service.getBetOptions(id);
-                console.log(betOptions.data)
+                console.log("isBet", betOptions.data)
                 if (betOptions.data.name === username){
                     setBet(betOptions.data)
                 } else {
@@ -200,7 +199,8 @@ const Main = props => {
             //         activePlayers.
             //     }
             // }
-            setPlayers(...data.data.activePlayers)
+            console.log("da end playas", data.data.activePlayers)
+            setPlayers(...[data.data.activePlayers])
             // for (let i = 0; i < activePlayers.length; i++){
             //     if (activePlayers[i].displayName != username){
             //         for (let j = 0; i < players.length; j++){
@@ -221,7 +221,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} />
+        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} />
      );
 }
  
