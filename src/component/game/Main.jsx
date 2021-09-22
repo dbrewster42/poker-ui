@@ -24,6 +24,8 @@ const Main = props => {
     const [isMax, setIsMax] = useState(false)
     const [isOver, setIsOver] = useState(false)
     const [endGameMessage, setEndGameMessage] = useState("")
+    const [isMyTurn, setIsMyTurn] = useState(false)
+
 
     const toggleBetModal = e => {
         setIsMax(e)
@@ -76,6 +78,7 @@ const Main = props => {
             const data = await Service.getNewRound(id, body);
             console.log("response body", data.data)
             setHand(data.data.hand)
+            setPlayers(data.data.users)
             // setMoney(data.data.userMoney)
             if (data.betOptions.name === username){
                 setBet(data.data.betOptions)
@@ -95,10 +98,9 @@ const Main = props => {
         console.log("dealing")
         try {
             const data = await Service.deal(id);
-            console.log(data)
             console.log("Dealt", data.data)
             setCards(data.data)
-            // setIsBet(true)
+            setIsBet(true)
             // setIsMax(false)
         } catch (err){
             console.error(err)
@@ -118,6 +120,7 @@ const Main = props => {
             let data = await Service.getBetOptions(id)
             console.log(data.data)
             setBetLog(data.data.messages)
+            setIsBet(data.data.bet)
             // if (data.data.name !== username){
             //     data = await Service.getBetOptions(id);
             //     console.log("retrying betOptions retrieval", data.data)
@@ -138,6 +141,7 @@ const Main = props => {
 
     const setBet = betOptions => {
         setBetOptions(betOptions)
+        setIsMyTurn(true)
         console.log("Your Bet Options are", betOptions)
         setIsBet(true)
     }
@@ -153,6 +157,7 @@ const Main = props => {
             const data = await Service.bet(id, body);
             setIsMax(false)
             setMoney(data.data.userMoney)
+            setIsMyTurn(false)
             console.log("Bet Response", data.data)
             setBetLog(data.data.messages)
             if (data.data.isBet){
@@ -188,6 +193,23 @@ const Main = props => {
             console.log("WINNER", data.data)
             setEndGameMessage(data.data.message)
             setIsOver(true)
+            // let activePlayers = data.data.activePlayers;        
+            // for (let i = 0; i < activePlayers.length; i++){
+            //     if (activePlayers[i].displayName === username){
+                   
+            //         activePlayers.
+            //     }
+            // }
+            setPlayers(...data.data.activePlayers)
+            // for (let i = 0; i < activePlayers.length; i++){
+            //     if (activePlayers[i].displayName != username){
+            //         for (let j = 0; i < players.length; j++){
+            //             if (activePlayers[i].displayName === players[j].displayName){
+            //                 players[j].cards = activePlayers[i].cards;
+            //             }
+            //         }
+            //     }
+            // }
         } catch (err){
             console.error(err)
             setErrorMessage(err.message)

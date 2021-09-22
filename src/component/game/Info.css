@@ -8,7 +8,7 @@
 } */
 .info {
     margin: 1%;
-    width: 15%;
+    width: 18%;
     height: 25%;
     padding: 5px;
     border: 1px dashed black;
@@ -19,10 +19,7 @@
     justify-content: space-evenly;
     flex-direction: column;
 }
-.my {
-    color:  rgb(38, 48, 58);
-    color: #05F100;
-}
+
 .cards {
     display: inline-block;
     width: 70px;

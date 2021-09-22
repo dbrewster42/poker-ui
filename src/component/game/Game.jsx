@@ -9,7 +9,6 @@ import Modal from "react-modal";
 
 
 const Game = props => {
-    console.log("props", props)
     let id = props.id;
     let players = props.players;
     let hand = props.hand;
@@ -34,10 +33,10 @@ const Game = props => {
                 <div>
                     {props.isBet ?
                         <div>
-                            {betOptions.name === username ?
+                            {props.isMyTurn ?
                                 <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
                             :
-                                <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button>
+                                <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Get Computer Bets</button>
                             }                              
                         </div>
                     :
@@ -76,7 +75,10 @@ const Game = props => {
                                 )
                             })}<br />
                         </div>
-                        <MyInfo name={username} money={props.money} hand={hand}  /> 
+                        {!props.isOver &&
+                            <MyInfo name={username} money={props.money} hand={hand}  /> 
+                        }                   
+                        
                     </div>                   
                 :
                     <SettingsForm startGame={props.startGame} username={username} />

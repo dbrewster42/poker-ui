@@ -3,7 +3,7 @@ import "./Info.css"
 const PlayerInfo = props => {
 
     return ( 
-        <div className="my info">
+        <div className="info">
            <h4>{props.name}</h4> {props.money}$
            {!props.isOver || props.hand == undefined ?
                 <div>          
