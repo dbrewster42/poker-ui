@@ -1,10 +1,8 @@
 import { useState } from "react";
 import "./Form.css"
-// import Service from "../../service/Service"
 
 
 const Bet = props => {
-    // console.log(props)
     let [action, setAction] = useState();
     let [betAmount, setBetAmount] = useState(props.betOptions.betAmount);
     let [possibleActions] = useState(props.betOptions.possibleActions);
@@ -39,7 +37,7 @@ const Bet = props => {
             </p>
             
             <form onSubmit={(e) => beginBet(e)}>
-                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[0]} />
+                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[0]} checked="checked" />
                 <label className="betLabels">{possibleActions[0]}</label><br />
                 <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[1]} />
                 <label className="betLabels">{possibleActions[1]}</label><br />
