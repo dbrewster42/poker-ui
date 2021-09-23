@@ -79,7 +79,7 @@ const Main = props => {
             setHand(data.data.hand)
             setPlayers(data.data.users)
             // setMoney(data.data.userMoney)
-            if (data.betOptions.name === username){
+            if (data.data.betOptions.name === username){
                 setBet(data.data.betOptions)
             } 
         } catch (err){

@@ -3,10 +3,10 @@ import "./Form.css"
 
 
 const Bet = props => {
-    let [action, setAction] = useState();
     let [betAmount, setBetAmount] = useState(props.betOptions.betAmount);
     let [possibleActions] = useState(props.betOptions.possibleActions);
     let [isNeeded, setIsNeeded] = useState(false)
+    let [action, setAction] = useState(possibleActions[0]);
 
     const beginBet = async e => {
         e.preventDefault();
