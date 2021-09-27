@@ -164,8 +164,6 @@ const Main = props => {
                 console.log("isBet", betOptions.data)
                 if (betOptions.data.name === username){
                     setBet(betOptions.data)
-                } else {
-                    throw Error("It should be the user's turn to bet")
                 }
             } else {
                 setIsBet(false)

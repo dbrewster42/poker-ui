@@ -32,13 +32,12 @@ const Login = () => {
     const createPlayer = async e => {
         e.preventDefault();
         console.log("creating player", username, buyIn)
-        let body = {};
-        body["username"] = username;
-        body["money"] = buyIn;
+        let body = { 
+            username,
+            money : buyIn
+        }
         try {
-            const data = await Service.createNewPlayer(body);
-            console.log(data.data)
-            console.log(data.data.body)
+            await Service.createNewPlayer(body);
         } catch (err) {
             console.log(err)
             setErrorMessage(err.message)
@@ -83,7 +82,7 @@ const Login = () => {
             <h2>Would You Like To Play A Game?</h2>
             {/* {isAuth && <button id="start"><Link to="/game">Start A Game</Link></button>} */}
             {isAuth ?
-             <button id="start"><Link to={{ pathname: "/game", state: {username : username}}}>Join A Table</Link></button>
+             <button id="start"><Link to={{ pathname: "/game", state: {username : username}}}>Start A Game</Link></button>
             :
               <div>
                     {showForm ? 
