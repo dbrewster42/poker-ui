@@ -45,7 +45,10 @@
     from {background-color: seagreen;}
     to {background-color: red;}
 }
-
+#buttons {
+    display: inline-flex;
+    margin: auto;
+}
 /* #C0 {
     margin-left: 1%;
     margin-top: 20%;

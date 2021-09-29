@@ -30,22 +30,7 @@ const Game = props => {
         <div id="background">
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
             {hasStarted &&
-                <div>
-                    {props.isBet ?
-                        <div>
-                            {props.isMyTurn ?
-                                <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
-                            :
-                                <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Get Computer Bets</button>
-                            }                              
-                        </div>
-                    :
-                        <button className="start" onClick={(e) => props.deal(e)}>Deal</button>                  
-                    }
-                    {props.isOver && 
-                        <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>        
-                    }
-                </div>
+               
             }
             <div id="table">
                 <Modal isOpen={props.isOver && showMessage} class="modal" ariaHideApp={false}>
@@ -74,6 +59,22 @@ const Game = props => {
                                     <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
                                 )
                             })}<br />
+                        </div>
+                        <div id="buttons">
+                            {props.isBet ?
+                                <div>
+                                    {props.isMyTurn ?
+                                        <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
+                                    :
+                                        <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Get Computer Bets</button>
+                                    }                              
+                                </div>
+                            :
+                                <button className="start" onClick={(e) => props.deal(e)}>Deal</button>                  
+                            }
+                            {props.isOver && 
+                                <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>        
+                            }
                         </div>
                         {!props.isOver &&
                             <MyInfo name={username} money={props.money} hand={hand}  /> 

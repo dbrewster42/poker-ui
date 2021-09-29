@@ -75,13 +75,14 @@ const Main = props => {
         let body = { username }
         try {
             const data = await Service.getNewRound(id, body);
-            console.log("response body", data.data)
-            setHand(data.data.hand)
-            setPlayers(data.data.users)
-            // setMoney(data.data.userMoney)
-            if (data.data.betOptions.name === username){
-                setBet(data.data.betOptions)
-            } 
+            console.log("response body for RESTART", data.data)
+            setVariables(data.data)
+            // setHand(data.data.hand)
+            // setPlayers(data.data.users)
+            // // setMoney(data.data.userMoney)
+            // if (data.data.betOptions.name === username){
+            //     setBet(data.data.betOptions)
+            // } 
         } catch (err){
             console.error(err)
             setErrorMessage(err.message)
