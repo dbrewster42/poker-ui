@@ -3,7 +3,7 @@ import "./Info.css"
 const MyInfo = props => {
 
     return ( 
-        <div className="info">
+        <div className="myInfo">
             <h4>{props.name}</h4> {props.money}$
             {props.hand.length > 0 &&
                 <div>

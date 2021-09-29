@@ -62,7 +62,6 @@ const Main = props => {
         // setUserMoney(data.users)
         setMoney(data.userMoney)
         // setPlayers([...data.users])
-        console.log("BET OPTIONS", data.betOptions)
         if (data.betOptions.name === username){
             setBet(data.betOptions)
         } 
@@ -99,9 +98,16 @@ const Main = props => {
         try {
             const data = await Service.deal(id);
             console.log("Dealt", data.data)
-            setCards(data.data)
-            setIsBet(true)
-            // setIsMax(false)
+            if (data.data.over){
+                let info = data.data.endRoundResponse;
+                setEndGameMessage(info.message)
+                setIsOver(true)
+                console.log("da end playas", info.activePlayers)
+                setPlayers(...[info.activePlayers])
+            } else {
+                setCards(data.data.riverCards)
+                setIsBet(true)
+            }
         } catch (err){
             console.error(err)
             setErrorMessage(err.message)
@@ -110,7 +116,6 @@ const Main = props => {
                 setShowModal(false)
             }, (2500))
         }    
-        // const betOptions = await Service.getBetOptions(id);
     }
 
     const getMyBetOptions = async e => {

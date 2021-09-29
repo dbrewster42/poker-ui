@@ -29,18 +29,15 @@ const Game = props => {
     return ( 
         <div id="background">
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
-            {hasStarted &&
-               
-            }
             <div id="table">
-                <Modal isOpen={props.isOver && showMessage} class="modal" ariaHideApp={false}>
+                <Modal isOpen={props.isOver && showMessage} className="modal" ariaHideApp={false}>
                     <h2>{props.endGameMessage}</h2>
                     <button onClick={() => setShowMessage(false)}>Okay</button>
                 </Modal>
 
-                <Modal isOpen={props.showModal} class="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
+                <Modal isOpen={props.showModal} className="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
 
-                <Modal isOpen={props.isBet && props.isMax} class="modal" ariaHideApp={false}>
+                <Modal isOpen={props.isBet && props.isMax} className="modal" ariaHideApp={false}>
                     <Bet betOptions={betOptions} placeBet={props.placeBet} />
                     <button onClick={() => props.toggleBetModal(false)}>Minimize</button>
                 </Modal>
@@ -61,8 +58,13 @@ const Game = props => {
                             })}<br />
                         </div>
                         <div id="buttons">
+                            {props.isOver ?
+                                <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>     
+                                :
+                                <MyInfo name={username} money={props.money} hand={hand}  />
+                            }
                             {props.isBet ?
-                                <div>
+                                <div className="buttonHolder">
                                     {props.isMyTurn ?
                                         <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
                                     :
@@ -70,16 +72,12 @@ const Game = props => {
                                     }                              
                                 </div>
                             :
-                                <button className="start" onClick={(e) => props.deal(e)}>Deal</button>                  
+                                <div className="buttonHolder">
+                                    <button className="start" onClick={(e) => props.deal(e)}>Deal</button>    
+                                </div>              
                             }
-                            {props.isOver && 
-                                <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>        
-                            }
-                        </div>
-                        {!props.isOver &&
-                            <MyInfo name={username} money={props.money} hand={hand}  /> 
-                        }                   
-                        
+
+                        </div>                                      
                     </div>                   
                 :
                     <SettingsForm startGame={props.startGame} username={username} />

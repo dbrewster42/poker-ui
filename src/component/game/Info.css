@@ -19,7 +19,20 @@
     justify-content: space-evenly;
     flex-direction: column;
 }
-
+.myInfo {
+    margin: 1%;
+    width: 30%;
+    height: 25%;
+    padding: 5px;
+    border: 1px dashed black;
+    border-radius: 10px;
+    background-color: rgb(38, 48, 58);
+    color: #05F100;
+    display: inline-flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    margin-left: 5%;
+}
 .cards {
     display: inline-block;
     width: 70px;

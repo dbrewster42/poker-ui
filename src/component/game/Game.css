@@ -29,14 +29,14 @@
     margin: 8%;
 }
 .start {
-    width: 18%;
+    width: 80%;
     height: 60px;
     padding: 10px;
     border-radius: 15px;
     background-color: red;
     color: white;
     margin: 2%;
-    margin-top: 5%;
+    margin-top: 25%;
     animation: startButton;
     font-weight: 700;
     font-size: 120%;
@@ -48,6 +48,11 @@
 #buttons {
     display: inline-flex;
     margin: auto;
+    width: 60%;
+    margin-left: 20%;
+}
+.buttonHolder {
+    width: 40%;
 }
 /* #C0 {
     margin-left: 1%;
