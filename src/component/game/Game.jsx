@@ -42,7 +42,6 @@ const Game = props => {
                     <button onClick={() => props.toggleBetModal(false)}>Minimize</button>
                 </Modal>
 
-                {/* {isBet && <Bet betOptions={betOptions} placeBet={props.placeBet} />} */}
                 {hasStarted ? 
                     <div> 
                         {players.map((v, i) => {
@@ -73,8 +72,10 @@ const Game = props => {
                                 </div>
                             :
                                 <div className="buttonHolder">
-                                    <button className="start" onClick={(e) => props.deal(e)}>Deal</button>    
-                                </div>              
+                                    {!props.isOver &&                    
+                                        <button className="start" onClick={(e) => props.deal(e)}>Deal</button>    
+                                    }  
+                                </div>           
                             }
 
                         </div>                                      
@@ -91,7 +92,7 @@ const Game = props => {
             <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
             <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
             <button onClick={() => printData()}>Check</button>
-            <button className="start" onClick={(e) => props.calculateWinner(e)}>Get Winner</button> 
+            {/* <button className="start" onClick={(e) => props.calculateWinner(e)}>Get Winner</button>  */}
         </div>
      );
 }

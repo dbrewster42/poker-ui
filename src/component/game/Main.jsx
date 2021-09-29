@@ -61,7 +61,6 @@ const Main = props => {
         setHand(data.hand)
         // setUserMoney(data.users)
         setMoney(data.userMoney)
-        // setPlayers([...data.users])
         if (data.betOptions.name === username){
             setBet(data.betOptions)
         } 
@@ -97,7 +96,7 @@ const Main = props => {
         console.log("dealing")
         try {
             const data = await Service.deal(id);
-            console.log("Dealt", data.data)
+            console.log("Dealing", data.data)
             if (data.data.over){
                 let info = data.data.endRoundResponse;
                 setEndGameMessage(info.message)
@@ -174,10 +173,6 @@ const Main = props => {
             } else {
                 setIsBet(false)
             }
-                // else {
-                //     //call deal in service?
-                // }
-            //} 
         } catch (err){
             console.error(err)
             setErrorMessage(err.message)
@@ -188,44 +183,28 @@ const Main = props => {
         }
     }
 
-    const calculateWinner = async (e) => {
-        e.preventDefault();
-        console.log("getting winner")
-        try {
-            const data = await Service.calculateWinner(id);
-            console.log("WINNER", data.data)
-            setEndGameMessage(data.data.message)
-            setIsOver(true)
-            // let activePlayers = data.data.activePlayers;        
-            // for (let i = 0; i < activePlayers.length; i++){
-            //     if (activePlayers[i].displayName === username){
-                   
-            //         activePlayers.
-            //     }
-            // }
-            console.log("da end playas", data.data.activePlayers)
-            setPlayers(...[data.data.activePlayers])
-            // for (let i = 0; i < activePlayers.length; i++){
-            //     if (activePlayers[i].displayName != username){
-            //         for (let j = 0; i < players.length; j++){
-            //             if (activePlayers[i].displayName === players[j].displayName){
-            //                 players[j].cards = activePlayers[i].cards;
-            //             }
-            //         }
-            //     }
-            // }
-        } catch (err){
-            console.error(err)
-            setErrorMessage(err.message)
-            setShowModal(true)
-            setTimeout(function(){
-                setShowModal(false)
-            }, (2500))
-        }    
-    }
+    // const calculateWinner = async (e) => {
+    //     e.preventDefault();
+    //     console.log("getting winner")
+    //     try {
+    //         const data = await Service.calculateWinner(id);
+    //         console.log("WINNER", data.data)
+    //         setEndGameMessage(data.data.message)
+    //         setIsOver(true)
+    //         console.log("da end playas", data.data.activePlayers)
+    //         setPlayers(...[data.data.activePlayers])
+    //     } catch (err){
+    //         console.error(err)
+    //         setErrorMessage(err.message)
+    //         setShowModal(true)
+    //         setTimeout(function(){
+    //             setShowModal(false)
+    //         }, (2500))
+    //     }    
+    // }
 
     return ( 
-        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} calculateWinner={calculateWinner} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} />
+        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} />
      );
 }
  
