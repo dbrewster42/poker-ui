@@ -40,6 +40,7 @@ const Game = props => {
                 <Modal isOpen={props.isBet && props.isMax} className="modal" ariaHideApp={false}>
                     <Bet betOptions={betOptions} placeBet={props.placeBet} />
                     <button onClick={() => props.toggleBetModal(false)}>Minimize</button>
+                    {props.betLog.length > 0 && <Log betLog={props.betLog} />} 
                 </Modal>
 
                 {hasStarted ? 
@@ -49,10 +50,10 @@ const Game = props => {
                                     <PlayerInfo name={v.username} money={v.money} key={i} isOver={props.isOver} hand={v.cards}  />
                                 ) 
                         })}<br />
-                        <div id="riverCards">
+                        <div id="riverContainer">
                             {cards.map((v, i) => {
                                 return (
-                                    <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
+                                    <img className="riverCards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
                                 )
                             })}<br />
                         </div>
