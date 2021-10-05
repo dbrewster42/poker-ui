@@ -9,73 +9,77 @@ import Modal from "react-modal";
 
 
 const Game = props => {
-    console.log("props", props)
     let id = props.id;
-    // let [players, setPlayers] = useState([])
-    // let [hasSet, setHasSet] = useState(true)
-    // if (props.hasStarted && hasSet){
-    //     setHasSet(false)
-    //     console.log("setting players !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", props.players)
-    //     setPlayers(props.players)
-    // }
     let players = props.players;
     let hand = props.hand;
     let hasStarted = props.hasStarted;
     let betOptions = props.betOptions;
     let cards = props.cards
-    const [money, setMoney] = useState(0)
     const username = props.username;
-    const [isMax, setIsMax] = useState(false)
+    const [showMessage, setShowMessage] = useState(true);
 
 
     const printData = () => {
-        console.log(props.players)
         console.log(players)
         console.log(id)
         console.log(hand)
-        console.log(hasSet)
+        console.log(props.isMax)
     }
-
-    const toggleBetModal = () => {
-        setIsMax(false)
-    }
-
-    // useEffect(() => {
-
-    // }, [])
 
     return ( 
         <div id="background">
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
-            {hasStarted &&
-                <div>
-                    <button onClick={() => printData()}>Check</button>
-                    <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
-                    <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
-                    {!isMax && <button className="start" onClick={() => setIsMax(true)}>Make Bet</button>}
-                </div>
-            }
             <div id="table">
-                <Modal isOpen={props.showModal} class="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
-                <Modal isOpen={props.isBet && isMax} class="modal" ariaHideApp={false}>
-                    <Bet betOptions={betOptions} placeBet={props.placeBet} />
-                    <button onClick={() => toggleBetModal()}>Minimize</button>
+                <Modal isOpen={props.isOver && showMessage} className="modal" ariaHideApp={false}>
+                    <h2>{props.endGameMessage}</h2>
+                    <button onClick={() => setShowMessage(false)}>Okay</button>
                 </Modal>
 
-                {/* {isBet && <Bet betOptions={betOptions} placeBet={props.placeBet} />} */}
+                <Modal isOpen={props.showModal} className="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
+
+                <Modal isOpen={props.isBet && props.isMax} className="modal" ariaHideApp={false}>
+                    <Bet betOptions={betOptions} placeBet={props.placeBet} />
+                    <button onClick={() => props.toggleBetModal(false)}>Minimize</button>
+                    {props.betLog.length > 0 && <Log betLog={props.betLog} />} 
+                </Modal>
+
                 {hasStarted ? 
                     <div> 
                         {players.map((v, i) => {
                                 return (
-                                    <PlayerInfo name={v.username} money={v.money} key={i} class="info" />
+                                    <PlayerInfo name={v.username} money={v.money} key={i} isOver={props.isOver} hand={v.cards}  />
                                 ) 
                         })}<br />
-                        {cards.map((v, i) => {
-                            return (
-                                <img className="cards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
-                            )
-                        })}<br />
-                            <MyInfo name={username} money={money} hand={hand} class="info" /> 
+                        <div id="riverContainer">
+                            {cards.map((v, i) => {
+                                return (
+                                    <img className="riverCards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
+                                )
+                            })}<br />
+                        </div>
+                        <div id="buttons">
+                            {props.isOver ?
+                                <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>     
+                                :
+                                <MyInfo name={username} money={props.money} hand={hand}  />
+                            }
+                            {props.isBet ?
+                                <div className="buttonHolder">
+                                    {props.isMyTurn ?
+                                        <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
+                                    :
+                                        <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Get Computer Bets</button>
+                                    }                              
+                                </div>
+                            :
+                                <div className="buttonHolder">
+                                    {!props.isOver &&                    
+                                        <button className="start" onClick={(e) => props.deal(e)}>Deal</button>    
+                                    }  
+                                </div>           
+                            }
+
+                        </div>                                      
                     </div>                   
                 :
                     <SettingsForm startGame={props.startGame} username={username} />
@@ -83,9 +87,13 @@ const Game = props => {
             
             </div>
 
+            {props.betLog.length > 0 && <Log betLog={props.betLog} />}        
             
-            <Log betLog={props.betLog} />
-
+            <button className="start" onClick={(e) => props.deal(e)}>Deal</button> 
+            <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Start Bets</button> 
+            <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
+            <button onClick={() => printData()}>Check</button>
+            {/* <button className="start" onClick={(e) => props.calculateWinner(e)}>Get Winner</button>  */}
         </div>
      );
 }

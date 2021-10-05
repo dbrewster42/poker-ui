@@ -1,6 +1,7 @@
 /* import backgroundImage from "../public/green.jpg" */
 #header {
-    color: red;
+    color: #05F100;
+    font-family: 'Share Tech Mono', monospace;
     font-size: 300%;
 }
 #background {
@@ -9,7 +10,7 @@
     color: #05F100;
     font-family: 'Share Tech Mono', monospace;
     width: 100%;
-    height: 1200px;
+    height: 1600px;
     padding: 10px;
 }
 #table {
@@ -17,22 +18,29 @@
     background-color: seagreen;
     border: 20px solid saddlebrown;
     border-radius: 20px;
-    width: 80%;
-    height: 700px;
-    margin-left: 10%;
+    width: 84%;
+    height: 620x;
+    margin-left: 8%;
     margin-top: 3%;
     display: flex;
     flex-direction: column;
 }
+#riverContainer {
+    margin: 8%;
+}
+.riverCards {
+    width: 10%;
+    margin: 1%;
+}
 .start {
-    width: 18%;
+    width: 80%;
     height: 60px;
     padding: 10px;
     border-radius: 15px;
     background-color: red;
     color: white;
     margin: 2%;
-    margin-top: 5%;
+    margin-top: 25%;
     animation: startButton;
     font-weight: 700;
     font-size: 120%;
@@ -41,7 +49,15 @@
     from {background-color: seagreen;}
     to {background-color: red;}
 }
-
+#buttons {
+    display: inline-flex;
+    margin: auto;
+    width: 60%;
+    margin-left: 20%;
+}
+.buttonHolder {
+    width: 40%;
+}
 /* #C0 {
     margin-left: 1%;
     margin-top: 20%;
@@ -63,18 +79,7 @@
     width: 22%;
     height: 27%;
 } */
-.info {
-    width: 17%;
-    height: 25%;
-    padding: 5px;
-    border: 1px dashed black;
-    border-radius: 10px;
-    background-color: rgb(38, 48, 58);
-    color: #05F100;
-    display: inline-flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-}
+
 /* #my {
     margin-top: 17%;
 } */
@@ -92,4 +97,5 @@
     margin: auto;
     width: 450px;
     height: 200px;
+    margin-top: 15%;
 }

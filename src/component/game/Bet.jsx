@@ -1,13 +1,12 @@
 import { useState } from "react";
 import "./Form.css"
-// import Service from "../../service/Service"
 
 
 const Bet = props => {
-    // console.log(props)
-    let [action, setAction] = useState();
     let [betAmount, setBetAmount] = useState(props.betOptions.betAmount);
-    let [possibleActions] = useState(props.betOptions.possibleActions)
+    let [possibleActions] = useState(props.betOptions.possibleActions);
+    let [isNeeded, setIsNeeded] = useState(false)
+    let [action, setAction] = useState(possibleActions[0]);
 
     const beginBet = async e => {
         e.preventDefault();
@@ -17,6 +16,11 @@ const Bet = props => {
 
     const handleChange = e => {
         setAction(e.target.value)
+        if (e.target.value === "RAISE" || e.target.value === "BET"){
+            setIsNeeded(true)
+        } else {
+            setIsNeeded(false)
+        }
         console.log(e.target.value)
     }
 
@@ -33,7 +37,7 @@ const Bet = props => {
             </p>
             
             <form onSubmit={(e) => beginBet(e)}>
-                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[0]} />
+                <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[0]} checked="checked" />
                 <label className="betLabels">{possibleActions[0]}</label><br />
                 <input type="radio" className="betFields" name="action" onChange={handleChange} value={possibleActions[1]} />
                 <label className="betLabels">{possibleActions[1]}</label><br />
@@ -45,7 +49,8 @@ const Bet = props => {
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[1]} /><br />
                 {possibleActions[2]}
                 <input className="fields" type="radio" name="action" onChange={handleChange} value={possibleActions[2]} /><br /> */}
-                <input className="fields" type="integer" name="betAmount" onChange={handleAmountChange} value={betAmount} /><br />
+                {isNeeded && <input className="fields" type="integer" name="betAmount" onChange={handleAmountChange} value={betAmount} />}<br />
+                
                 <input className="submit" type="submit" value="Submit" />
             </form>
         </div>

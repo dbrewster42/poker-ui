@@ -7,14 +7,9 @@
     background-color: black;
     color: white;
     margin: 2%;
+    padding: 5px;
+    width: 65px;
 }
-
-/* #form {
-    background-color: rgb(60, 73, 87);
-    border: 2px solid black;
-    width: 30%;
-    margin-left: 35%;
-} */
 
 #form {
     background-color: rgb(60, 73, 87);
@@ -22,7 +17,8 @@
     width: 50%;
     height: 65%;
     margin-left: 25%;
-    margin-top: 6%;
+    margin-top: 8%;
+    margin-bottom: 8%;
 }
 
 #betForm {

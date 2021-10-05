@@ -9,11 +9,9 @@ const headers =    {
 
 class Service {
     createNewPlayer(body){
-        console.log(body, "--------", headers)
         return axios.post(`${url}/register`, body, headers)
     }
     signIn(body){
-        console.log(body, "--------", headers)
         return axios.post(`${url}/login`, body, headers)
     }
     addMoney(body){
@@ -22,6 +20,9 @@ class Service {
     }
     startGame(body){
         return axios.post(`${url}/game`, body, headers)
+    }
+    getNewRound(gameId, body){
+        return axios.post(`${url}/game/${gameId}/restart`, body, headers)
     }
     // newDeal(gameId){
     //     return axios.get(`${url}/game/${gameId}/new-deal`, headers)
@@ -37,6 +38,9 @@ class Service {
     }
     bet(gameId, body){
         return axios.post(`${url}/game/${gameId}/bet`, body, headers)
+    }
+    calculateWinner(gameId){
+        return axios.get(`${url}/game/${gameId}/winner`, headers)
     }
 }
 export default new Service();
