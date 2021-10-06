@@ -84,7 +84,7 @@ const Login = () => {
             {isAuth ?
              <button id="start"><Link to={{ pathname: "/game", state: {username : username}}}>Start A Game</Link></button>
             :
-              <div>
+              <div className="playerForm">
                     {showForm ? 
                         <PlayerForm toggleForm={toggleForm} setErrorMessage={setErrorMessage} changeBuyIn={changeBuyIn} changeName={changeName} createPlayer={createPlayer} isExisting={isExisting} logIn={logIn} /> :
                         <div>

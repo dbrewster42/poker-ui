@@ -72,6 +72,7 @@ const Main = props => {
         setCards([])
         let body = { username }
         try {
+            console.log("RICCCOOOLAAA", id, body);
             const data = await Service.getNewRound(id, body);
             console.log("response body for RESTART", data.data)
             setVariables(data.data)
@@ -99,6 +100,7 @@ const Main = props => {
             console.log("Dealing", data.data)
             if (data.data.over){
                 let info = data.data.endRoundResponse;
+                console.log("this is the end", info)
                 setEndGameMessage(info.message)
                 setIsOver(true)
                 console.log("da end playas", info.activePlayers)
@@ -175,6 +177,7 @@ const Main = props => {
             }
         } catch (err){
             console.error(err)
+            toggleBetModal(false)
             setErrorMessage(err.message)
             setShowModal(true)
             setTimeout(function(){

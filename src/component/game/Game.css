@@ -26,10 +26,10 @@
     flex-direction: column;
 }
 #riverContainer {
-    margin: 8%;
+    margin: 5%;
 }
 .riverCards {
-    width: 10%;
+    width: 9%;
     margin: 1%;
 }
 .start {

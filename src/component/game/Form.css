@@ -16,9 +16,10 @@
     border: 2px solid black;
     width: 50%;
     height: 65%;
-    margin-left: 25%;
+    margin-left: 23%;
     margin-top: 8%;
     margin-bottom: 8%;
+    padding: 2%;
 }
 
 #betForm {

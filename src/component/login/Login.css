@@ -86,13 +86,17 @@ h2, h3, h4, .subheaders {
 }
 
 em {
-    color: #78a778;
+    color: rgb(94, 94, 173);
 }
 
 #modal {
-    background-color: rgb(38, 48, 58);
+    background-color: rgb(14, 48, 82);
     color: #05F100;
     margin: auto;
     width: 450px;
     height: 200px;
+}
+.playerForm {
+    width: 80%;
+    margin: auto;
 }
