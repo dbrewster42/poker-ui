@@ -22,6 +22,7 @@ const Main = props => {
     const [errorMessage, setErrorMessage] = useState("")
     const [isMax, setIsMax] = useState(false)
     const [isOver, setIsOver] = useState(false)
+    const [showMessage, setShowMessage] = useState(true);
     const [endGameMessage, setEndGameMessage] = useState("")
     const [isMyTurn, setIsMyTurn] = useState(false)
 
@@ -76,12 +77,6 @@ const Main = props => {
             const data = await Service.getNewRound(id, body);
             console.log("response body for RESTART", data.data)
             setVariables(data.data)
-            // setHand(data.data.hand)
-            // setPlayers(data.data.users)
-            // // setMoney(data.data.userMoney)
-            // if (data.data.betOptions.name === username){
-            //     setBet(data.data.betOptions)
-            // } 
         } catch (err){
             console.error(err)
             setErrorMessage(err.message)
@@ -103,6 +98,7 @@ const Main = props => {
                 console.log("this is the end", info)
                 setEndGameMessage(info.message)
                 setIsOver(true)
+                setShowMessage(true)
                 console.log("da end playas", info.activePlayers)
                 setPlayers(...[info.activePlayers])
             } else {
@@ -186,28 +182,8 @@ const Main = props => {
         }
     }
 
-    // const calculateWinner = async (e) => {
-    //     e.preventDefault();
-    //     console.log("getting winner")
-    //     try {
-    //         const data = await Service.calculateWinner(id);
-    //         console.log("WINNER", data.data)
-    //         setEndGameMessage(data.data.message)
-    //         setIsOver(true)
-    //         console.log("da end playas", data.data.activePlayers)
-    //         setPlayers(...[data.data.activePlayers])
-    //     } catch (err){
-    //         console.error(err)
-    //         setErrorMessage(err.message)
-    //         setShowModal(true)
-    //         setTimeout(function(){
-    //             setShowModal(false)
-    //         }, (2500))
-    //     }    
-    // }
-
     return ( 
-        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} />
+        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} showMessage={showMessage} setShowMessage={setShowMessage} />
      );
 }
  

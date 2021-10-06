@@ -1,5 +1,4 @@
 import "./Game.css"
-import { useState } from "react";
 import SettingsForm from "./SettingsForm"
 import PlayerInfo from "./PlayerInfo"
 import MyInfo from "./MyInfo"
@@ -16,7 +15,6 @@ const Game = props => {
     let betOptions = props.betOptions;
     let cards = props.cards
     const username = props.username;
-    const [showMessage, setShowMessage] = useState(true);
 
 
     const printData = () => {
@@ -30,9 +28,9 @@ const Game = props => {
         <div id="background">
             <h1 id="header">Devon's Texas Hold 'Em</h1> 
             <div id="table">
-                <Modal isOpen={props.isOver && showMessage} className="modal" ariaHideApp={false}>
+                <Modal isOpen={props.isOver && props.showMessage} className="modal" ariaHideApp={false}>
                     <h2>{props.endGameMessage}</h2>
-                    <button onClick={() => setShowMessage(false)}>Okay</button>
+                    <button onClick={() => props.setShowMessage(false)}>Okay</button>
                 </Modal>
 
                 <Modal isOpen={props.showModal} className="modal" ariaHideApp={false}><h2>{props.errorMessage}</h2><button>Okay</button></Modal>
