@@ -8,6 +8,7 @@ const SettingsForm = props => {
         numberOfPlayers: 4,
         bigBlind: 5,
         buyIn: 100,
+        ante: 0,
         // maxBet: null, only ask if isCustom = true
         fillWithComputerPlayers : true,
         isCustom : false
@@ -40,6 +41,8 @@ const SettingsForm = props => {
                 <input className="fields" type="number" name="bigBlind" onChange={handleChange} value={state.bigBlind} /><br />
                 Buy In<br />
                 <input className="fields" type="number" name="bigBlind" onChange={handleChange} value={state.buyIn} /><br />
+                Ante<br />
+                <input className="fields" type="number" name="bigBlind" onChange={handleChange} value={state.ante} /><br />
                 Fill Empty Slots with Computer Players?<br />
                 <input className="fields" type="checkbox" name="fillWithComputerPlayers" onChange={handleChange} checked={state.fillWithComputerPlayers} /><br />
                 Do you want to use custom rules?<br />
