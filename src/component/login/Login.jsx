@@ -22,6 +22,7 @@ const Login = () => {
     }
 
     const toggleFormForNew = () => {
+        setIsExisting(false)
         setShowForm(x => !x)
     }
     const toggleForm = () => {
@@ -40,8 +41,13 @@ const Login = () => {
             await Service.createNewPlayer(body);
         } catch (err) {
             console.log(err)
+            console.error(err.message)
+            console.log(err.response.data.errMessage)
             setErrorMessage(err.message)
             setShowModal(true)
+            setTimeout(function(){
+                setShowModal(false)
+            }, (2500))
         }
 
         //success or failure. boolean or string?
@@ -59,6 +65,7 @@ const Login = () => {
         } catch (err) {
             console.error(err)
             console.error(err.message)
+            console.log(err.response.data.errMessage)
             setErrorMessage(err.message)
             setShowModal(true)
             setTimeout(function(){
