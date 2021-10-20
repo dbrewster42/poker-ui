@@ -4,6 +4,7 @@ import "./Form.css"
 const SettingsForm = props => {
     const [displayName] = useState(props.username);
     const [state, setState] = useState({
+        username: props.username,
         displayName: displayName,
         numberOfPlayers: 4,
         bigBlind: 5,
@@ -11,12 +12,9 @@ const SettingsForm = props => {
         ante: 0,
         // maxBet: null, only ask if isCustom = true
         fillWithComputerPlayers : true,
-        isCustom : false
+        hasJokers : false
       })
     console.log(state)
-    // const [displayName, setDisplayName] = useState(props.username);
-    // const [numberOfPlayers, setNumberOfPlayers] = useState(4);
-    // const [isCustom, setIsCustom] = useState(false);
     const handleChange = e => {
         setState({
             ...state,
@@ -45,8 +43,8 @@ const SettingsForm = props => {
                 <input className="fields" type="number" name="bigBlind" onChange={handleChange} value={state.ante} /><br />
                 Fill Empty Slots with Computer Players?<br />
                 <input className="fields" type="checkbox" name="fillWithComputerPlayers" onChange={handleChange} checked={state.fillWithComputerPlayers} /><br />
-                Do you want to use custom rules?<br />
-                <input className="fields" type="checkbox" name="isCustom" onChange={handleChange} checked={state.isCustom} /><br />
+                Do you want to use wildcards?<br />
+                <input className="fields" type="checkbox" name="isCustom" onChange={handleChange} checked={state.hasJokers} /><br />
                 <input className="submit" type="submit" value="Submit" />
             </form>
         </div>
