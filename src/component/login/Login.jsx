@@ -40,10 +40,8 @@ const Login = () => {
         try {
             await Service.createNewPlayer(body);
         } catch (err) {
-            console.log(err)
-            console.error(err.message)
-            console.log(err.response.data.errMessage)
-            setErrorMessage(err.message)
+            console.log(err.response.data.message)
+            setErrorMessage(err.response.data.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -63,10 +61,8 @@ const Login = () => {
             const data = await Service.signIn(body)
             console.log(data.data)
         } catch (err) {
-            console.error(err)
-            console.error(err.message)
-            console.log(err.response.data.errMessage)
-            setErrorMessage(err.message)
+            console.log(err.response.data.message)
+            setErrorMessage(err.response.data.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)

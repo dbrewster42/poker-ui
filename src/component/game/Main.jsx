@@ -46,8 +46,8 @@ const Main = props => {
             console.log("response body", data.data)
             setVariables(data.data);
         } catch (err){
-            console.error(err)
-            setErrorMessage(err.message)
+            console.log(err.response.data.message)
+            setErrorMessage(err.response.data.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -78,8 +78,8 @@ const Main = props => {
             console.log("response body for RESTART", data.data)
             setVariables(data.data)
         } catch (err){
-            console.error(err)
-            setErrorMessage(err.message)
+            console.log(err.response.data.message)
+            setErrorMessage(err.response.data.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -106,8 +106,8 @@ const Main = props => {
                 setIsBet(true)
             }
         } catch (err){
-            console.error(err)
-            setErrorMessage(err.message)
+            console.log(err.response.data.message)
+            setErrorMessage(err.response.data.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -131,8 +131,8 @@ const Main = props => {
                 setBet(data.data.betOptions)
             }
         } catch (err){
-            console.log(err)
-            setErrorMessage(err.message)
+            console.log(err.response.data.message)
+            setErrorMessage(err.response.data.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
@@ -172,9 +172,9 @@ const Main = props => {
                 setIsBet(false)
             }
         } catch (err){
-            console.error(err)
+            console.log(err.response.data.message)
+            setErrorMessage(err.response.data.message)
             toggleBetModal(false)
-            setErrorMessage(err.message)
             setShowModal(true)
             setTimeout(function(){
                 setShowModal(false)
