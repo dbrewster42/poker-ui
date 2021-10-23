@@ -1,8 +1,9 @@
-import "./Game.css"
+import "../Game.css"
 import PlayerInfo from "../PlayerInfo"
 
 
 const HoldEm = props => {
+    console.log("Hold Em", props)
     let players = props.players;
     let cards = props.cards;
 

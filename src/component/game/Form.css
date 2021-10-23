@@ -34,3 +34,10 @@
     margin-left: 10%;
     margin-right: 10%;
 }
+
+#type {
+    width: 50%;
+    font-size: large;
+    font-weight: 800;
+    color: rgb(54, 54, 151);
+}

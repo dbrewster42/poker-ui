@@ -38,7 +38,11 @@ const Main = props => {
             numberOfPlayers : state.numberOfPlayers,
             fillWithComputerPlayers: state.fillWithComputerPlayers,
             isCustom: state.isCustom,
-            bigBlind: state.bigBlind
+            bigBlind: state.bigBlind,
+            ante : state.ante,
+            buyIn : state.buyIn,
+            hasJokers : state.hasJokers,
+            gameType : state.gameType
          }
         console.log("request", body)
         try {
@@ -56,6 +60,7 @@ const Main = props => {
     }
 
     const setVariables = data => {
+        console.log("setting vars", data)
         setPlayers(data.users);
         setHasStarted(true)
         setId(data.gameId)

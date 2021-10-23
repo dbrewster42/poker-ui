@@ -12,15 +12,15 @@ const SettingsForm = props => {
         ante: 0,
         // maxBet: null, only ask if isCustom = true
         fillWithComputerPlayers : true,
-        hasJokers : false
+        hasJokers : false,
+        gameType : "TEXAS_HOLD_EM"
       })
-    console.log(state)
     const handleChange = e => {
         setState({
             ...state,
             [e.target.name] : e.target.value
         })
-        console.log(state)
+        // console.log(state)
     }
     const sendSettings = e => {
         e.preventDefault();
@@ -45,6 +45,10 @@ const SettingsForm = props => {
                 <input className="fields" type="checkbox" name="fillWithComputerPlayers" onChange={handleChange} checked={state.fillWithComputerPlayers} /><br />
                 Do you want to use wildcards?<br />
                 <input className="fields" type="checkbox" name="isCustom" onChange={handleChange} checked={state.hasJokers} /><br />
+                <select name="type" id="type"  onChange={handleChange}>
+                    <option value="TEXAS_HOLD_EM">Texas Hold Em</option>
+                    <option value="SEVEN_CARD_STUD">Seven Card Stud</option>
+                </select>< br />
                 <input className="submit" type="submit" value="Submit" />
             </form>
         </div>

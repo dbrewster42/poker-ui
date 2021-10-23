@@ -42,7 +42,7 @@ const Game = props => {
 
                 {hasStarted ? 
                     <div>
-                        <HoldEm />    
+                        <HoldEm players={players} cards={props.cards} isOver={props.isOver} />    
                         <div id="buttons">
                             {props.isOver ?
                                 <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>     
