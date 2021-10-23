@@ -1,10 +1,10 @@
 import "./Game.css"
 import SettingsForm from "./SettingsForm"
-import PlayerInfo from "./PlayerInfo"
-import MyInfo from "./MyInfo"
+import HoldEm from "./type/HoldEm"
 import Bet from "./Bet"
 import Log from "./Log"
 import Modal from "react-modal";
+import MyInfo from "./MyInfo"
 
 
 const Game = props => {
@@ -13,7 +13,6 @@ const Game = props => {
     let hand = props.hand;
     let hasStarted = props.hasStarted;
     let betOptions = props.betOptions;
-    let cards = props.cards
     const username = props.username;
 
 
@@ -42,19 +41,8 @@ const Game = props => {
                 </Modal>
 
                 {hasStarted ? 
-                    <div> 
-                        {players.map((v, i) => {
-                                return (
-                                    <PlayerInfo name={v.displayName} money={v.money} key={i} isOver={props.isOver} hand={v.cards}  />
-                                ) 
-                        })}<br />
-                        <div id="riverContainer">
-                            {cards.map((v, i) => {
-                                return (
-                                    <img className="riverCards" key={i} src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt={v.image} />
-                                )
-                            })}<br />
-                        </div>
+                    <div>
+                        <HoldEm />    
                         <div id="buttons">
                             {props.isOver ?
                                 <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>     
@@ -77,8 +65,8 @@ const Game = props => {
                                 </div>           
                             }
 
-                        </div>                                      
-                    </div>                   
+                        </div>   
+                    </div>
                 :
                     <SettingsForm startGame={props.startGame} username={username} />
                 }
