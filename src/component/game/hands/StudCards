@@ -1,25 +1,35 @@
 import "./Info.css"
 
 const StudCards = props => {
+    let hand = props.hand;
 
     return ( 
-       <div className="info">
+       <div className="stud">
             <h4>{props.name}</h4> {props.money}$
-            {!props.isOver || props.hand === undefined ?
-                <div>          
-                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
-                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
-                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[0].image} alt="card" />
-                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[1].image} alt="card" />
-                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[2].image} alt="card" />
-                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[3].image} alt="card" />
-                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
+            {hand !== undefined && 
+            <div>
+                {!props.isOver ?
+            
+                    <div>          
+                        <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
+                        <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
+                        {hand.map(v => {
+                            <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt="card" />
+                        })}
 
-                </div>   
-            :
-                <div>
-                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[0].image} alt="card" />
-                    <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[1].image} alt="card" />
+                        {props.isLastTurn &&
+                            <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
+                        }
+                        
+
+                    </div>   
+                :
+                    <div>
+                        {hand.map(v => {
+                            <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt="card" />
+                        })}
+                    </div>
+                }
                 </div>
             }
         </div> 
@@ -27,3 +37,10 @@ const StudCards = props => {
 }
  
 export default StudCards;
+
+
+
+                        {/* <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[0].image} alt="card" />
+                        <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[1].image} alt="card" />
+                        <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[2].image} alt="card" />
+                        <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[3].image} alt="card" /> */}

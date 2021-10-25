@@ -43,10 +43,11 @@ const Game = props => {
 
                 {hasStarted ? 
                     <div>
-                        {props.gameType === "holdem" ?
+
+                        {props.gameType === "TEXAS_HOLD_EM" ?
                             <HoldEm players={players} cards={props.cards} isOver={props.isOver} />  
                             :
-                            <StudCards players={players} cards={props.cards} isOver={props.isOver} />  
+                            <SevenStud players={players} isOver={props.isOver} isLastTurn={props.isLastTurn} />  
                         }
                        
 

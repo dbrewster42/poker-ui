@@ -25,7 +25,8 @@ const Main = props => {
     const [showMessage, setShowMessage] = useState(true);
     const [endGameMessage, setEndGameMessage] = useState("")
     const [isMyTurn, setIsMyTurn] = useState(false)
-    const [gameType, setGameType] = useState("holdem")
+    const [gameType, setGameType] = useState("TEXAS_HOLD_EM")
+    let [isLastTurn, setIsLastTurn] = useState(false)
 
 
     const toggleBetModal = e => {
@@ -46,6 +47,7 @@ const Main = props => {
         //     gameType : state.gameType
         //  }
         // console.log("request", body)
+        setGameType(state.gameType);
         try {
             const data = await Service.startGame(state);
             console.log("response body", data.data)
@@ -110,6 +112,7 @@ const Main = props => {
             } else {
                 setCards(data.data.riverCards)
                 setIsBet(true)
+                setIsLastTurn(data.data.isLastTurn)
             }
         } catch (err){
             console.log(err.response.data.message)
@@ -189,7 +192,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} showMessage={showMessage} setShowMessage={setShowMessage} gameType={gameType} />
+        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} showMessage={showMessage} setShowMessage={setShowMessage} gameType={gameType} isLastTurn={isLastTurn} />
      );
 }
  
