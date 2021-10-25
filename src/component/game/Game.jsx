@@ -4,7 +4,8 @@ import HoldEm from "./type/HoldEm"
 import Bet from "./Bet"
 import Log from "./Log"
 import Modal from "react-modal";
-import MyInfo from "./MyInfo"
+import MyInfo from "./hands/MyInfo"
+import StudCards from "./hands/StudCards"
 
 
 const Game = props => {
@@ -42,7 +43,13 @@ const Game = props => {
 
                 {hasStarted ? 
                     <div>
-                        <HoldEm players={players} cards={props.cards} isOver={props.isOver} />    
+                        {props.gameType === "holdem" ?
+                            <HoldEm players={players} cards={props.cards} isOver={props.isOver} />  
+                            :
+                            <StudCards players={players} cards={props.cards} isOver={props.isOver} />  
+                        }
+                       
+
                         <div id="buttons">
                             {props.isOver ?
                                 <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>     

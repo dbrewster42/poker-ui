@@ -25,6 +25,7 @@ const Main = props => {
     const [showMessage, setShowMessage] = useState(true);
     const [endGameMessage, setEndGameMessage] = useState("")
     const [isMyTurn, setIsMyTurn] = useState(false)
+    const [gameType, setGameType] = useState("holdem")
 
 
     const toggleBetModal = e => {
@@ -33,20 +34,20 @@ const Main = props => {
 
     const startGame = async (state) => {
         console.log("state", state)
-        let body = { username, 
-            displayName : state.displayName,
-            numberOfPlayers : state.numberOfPlayers,
-            fillWithComputerPlayers: state.fillWithComputerPlayers,
-            isCustom: state.isCustom,
-            bigBlind: state.bigBlind,
-            ante : state.ante,
-            buyIn : state.buyIn,
-            hasJokers : state.hasJokers,
-            gameType : state.gameType
-         }
-        console.log("request", body)
+        // let body = { username, 
+        //     displayName : state.displayName,
+        //     numberOfPlayers : state.numberOfPlayers,
+        //     fillWithComputerPlayers: state.fillWithComputerPlayers,
+        //     isCustom: state.isCustom,
+        //     bigBlind: state.bigBlind,
+        //     ante : state.ante,
+        //     buyIn : state.buyIn,
+        //     hasJokers : state.hasJokers,
+        //     gameType : state.gameType
+        //  }
+        // console.log("request", body)
         try {
-            const data = await Service.startGame(body);
+            const data = await Service.startGame(state);
             console.log("response body", data.data)
             setVariables(data.data);
         } catch (err){
@@ -188,7 +189,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} showMessage={showMessage} setShowMessage={setShowMessage} />
+        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} showMessage={showMessage} setShowMessage={setShowMessage} gameType={gameType} />
      );
 }
  

@@ -1,5 +1,5 @@
 import "../Game.css"
-import PlayerInfo from "../PlayerInfo"
+import PlayerInfo from "../hands/PlayerInfo"
 
 
 const HoldEm = props => {
