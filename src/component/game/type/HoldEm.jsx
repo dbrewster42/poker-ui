@@ -3,7 +3,6 @@ import PlayerInfo from "../hands/PlayerInfo"
 
 
 const HoldEm = props => {
-    console.log("Hold Em", props)
     let players = props.players;
     let cards = props.cards;
 
@@ -12,7 +11,7 @@ const HoldEm = props => {
 
             {players.map((v, i) => {
                     return (
-                        <PlayerInfo name={v.displayName} money={v.money} key={i} isOver={props.isOver} hand={v.cards}  />
+                        <PlayerInfo name={v.displayName} money={v.money} key={i} isOver={props.isOver} hand={v.cards} pokerHandName={v.pokerHandName}  />
                     ) 
             })}<br />
 

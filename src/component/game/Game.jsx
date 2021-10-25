@@ -5,7 +5,7 @@ import Bet from "./Bet"
 import Log from "./Log"
 import Modal from "react-modal";
 import MyInfo from "./hands/MyInfo"
-import StudCards from "./hands/StudCards"
+import SevenStud from "./type/SevenStud"
 
 
 const Game = props => {

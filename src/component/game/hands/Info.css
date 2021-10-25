@@ -60,3 +60,8 @@ h4 {
     justify-content: space-evenly;
     flex-direction: column;
 }
+.pokerHand {
+    color: red;
+    font-weight: 900;
+    margin: 0%;
+}

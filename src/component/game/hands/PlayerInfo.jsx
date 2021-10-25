@@ -12,6 +12,7 @@ const PlayerInfo = props => {
                 </div>   
             :
                 <div>
+                    <h2 className="pokerHand">{props.pokerHandName}</h2>
                     <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[0].image} alt="card" />
                     <img className="cards" src={process.env.PUBLIC_URL + '/pics/PNG/' + props.hand[1].image} alt="card" />
                 </div>

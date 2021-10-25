@@ -1,6 +1,8 @@
 import StudCards from "../hands/StudCards";
 
 const SevenStud = props => {
+    let players = props.players;
+    
     return ( 
         <div> 
             {players.map((v, i) => {
