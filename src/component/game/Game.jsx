@@ -1,8 +1,8 @@
 import "./Game.css"
 import SettingsForm from "./SettingsForm"
 import HoldEm from "./type/HoldEm"
-import Bet from "./Bet"
-import Log from "./Log"
+import Bet from "./extra/Bet"
+import Log from "./extra/Log"
 import Modal from "react-modal";
 import MyInfo from "./hands/MyInfo"
 import SevenStud from "./type/SevenStud"

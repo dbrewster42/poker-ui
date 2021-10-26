@@ -1,7 +1,12 @@
+import { useState } from "react/cjs/react.development";
 import "./Info.css"
 
 const MyInfo = props => {
     let hand = props.hand;
+    let [width, setWidth] = useState("myInfo");
+    if (hand.length > 2){
+        setWidth("myStudInfo")
+    }
 
     return ( 
         <div className="myInfo">
