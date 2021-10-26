@@ -1,6 +1,7 @@
 import StudCards from "../hands/StudCards";
 
 const SevenStud = props => {
+    console.log(props)
     let players = props.players;
     
     return ( 

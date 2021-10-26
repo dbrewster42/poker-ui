@@ -14,7 +14,9 @@ const StudCards = props => {
                         <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
                         <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
                         {hand.map(v => {
-                            <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt="card" />
+                            return (
+                                <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt="card" />
+                            )
                         })}
 
                         {props.isLastTurn &&
@@ -25,8 +27,12 @@ const StudCards = props => {
                     </div>   
                 :
                     <div>
+                        <h2 className="pokerHand">{props.pokerHandName}</h2>
+
                         {hand.map(v => {
-                            <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt="card" />
+                            return (
+                                <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt="card" />
+                            )
                         })}
                     </div>
                 }

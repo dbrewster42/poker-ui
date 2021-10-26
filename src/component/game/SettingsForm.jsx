@@ -20,7 +20,6 @@ const SettingsForm = props => {
             ...state,
             [e.target.name] : e.target.value
         })
-        // console.log(state)
     }
     const sendSettings = e => {
         e.preventDefault();
@@ -38,14 +37,14 @@ const SettingsForm = props => {
                 Big Blind<br />
                 <input className="fields" type="number" name="bigBlind" onChange={handleChange} value={state.bigBlind} /><br />
                 Buy In<br />
-                <input className="fields" type="number" name="bigBlind" onChange={handleChange} value={state.buyIn} /><br />
+                <input className="fields" type="number" name="buyIn" onChange={handleChange} value={state.buyIn} /><br />
                 Ante<br />
-                <input className="fields" type="number" name="bigBlind" onChange={handleChange} value={state.ante} /><br />
+                <input className="fields" type="number" name="ante" onChange={handleChange} value={state.ante} /><br />
                 Fill Empty Slots with Computer Players?<br />
                 <input className="fields" type="checkbox" name="fillWithComputerPlayers" onChange={handleChange} checked={state.fillWithComputerPlayers} /><br />
                 Do you want to use wildcards?<br />
                 <input className="fields" type="checkbox" name="isCustom" onChange={handleChange} checked={state.hasJokers} /><br />
-                <select name="type" id="type"  onChange={handleChange}>
+                <select name="gameType" id="type"  onChange={handleChange}>
                     <option value="TEXAS_HOLD_EM">Texas Hold Em</option>
                     <option value="SEVEN_CARD_STUD">Seven Card Stud</option>
                 </select>< br />

@@ -71,6 +71,7 @@ const Main = props => {
         // setUserMoney(data.users)
         setMoney(data.userMoney)
         if (data.betOptions.name === username){
+            console.log("still humming")
             setBet(data.betOptions)
         } 
     }
@@ -112,7 +113,11 @@ const Main = props => {
             } else {
                 setCards(data.data.riverCards)
                 setIsBet(true)
-                setIsLastTurn(data.data.isLastTurn)
+                if (gameType === "SEVEN_CARD_STUD"){
+                    setIsLastTurn(data.data.isLastTurn)
+                    setPlayers(data.data.players)
+                }
+                
             }
         } catch (err){
             console.log(err.response.data.message)
