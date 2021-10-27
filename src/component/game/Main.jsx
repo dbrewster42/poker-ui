@@ -9,6 +9,8 @@ const Main = props => {
         console.log("setting username", props.location.state)
         setUsername(props.location.state.username)
     }
+    let [displayName, setDisplayName] = useState("")
+
     const [money, setMoney] = useState(0)
     let [isBet, setIsBet] = useState(false);
     let [betOptions, setBetOptions] = useState();
@@ -27,6 +29,7 @@ const Main = props => {
     const [isMyTurn, setIsMyTurn] = useState(false)
     const [gameType, setGameType] = useState("TEXAS_HOLD_EM")
     let [isLastTurn, setIsLastTurn] = useState(false)
+    let [width, setWidth] = useState("myInfo");
 
 
     const toggleBetModal = e => {
@@ -48,6 +51,7 @@ const Main = props => {
         //  }
         // console.log("request", body)
         setGameType(state.gameType);
+        setDisplayName(state.displayName);
         try {
             const data = await Service.startGame(state);
             console.log("response body", data.data)
@@ -68,6 +72,10 @@ const Main = props => {
         setHasStarted(true)
         setId(data.gameId)
         setHand(data.hand)
+        if (data.hand.length > 2){
+            setWidth("myStudInfo")
+        }
+    
         // setUserMoney(data.users)
         setMoney(data.userMoney)
         if (data.betOptions.name === username){
@@ -114,8 +122,13 @@ const Main = props => {
                 setCards(data.data.riverCards)
                 setIsBet(true)
                 if (gameType === "SEVEN_CARD_STUD"){
-                    setIsLastTurn(data.data.isLastTurn)
-                    setPlayers(data.data.players)
+                    setStudInfo(data.data)
+                    // setIsLastTurn(data.data.isLastTurn)
+                    // // let tempPlayers = data.data.playerDtos;
+                    // // for (let i = 0; i < tempPlayers.length; i++){
+                    // //     if (tempPlayers[i].displayName == )
+                    // // }
+                    // setPlayers(data.data.playerDtos)
                 }
                 
             }
@@ -127,6 +140,33 @@ const Main = props => {
                 setShowModal(false)
             }, (2500))
         }    
+    }
+
+    const setStudInfo = data => {
+        let tempPlayers = data.playerDtos;
+        // if (tempPlayers[tempPlayers.length-1].displayName === displayName){
+        //     setHand(tempPlayers[i].cards)
+        //     tempPlayers.splice(i, 1)
+        // }
+        for (let i = tempPlayers.length-1; i >= 0; i--){
+            if (tempPlayers[i].displayName === displayName){
+                setHand(tempPlayers[i].cards)
+                tempPlayers.splice(i, 1)
+                break
+            }
+        }
+        setPlayers(tempPlayers);
+        setIsLastTurn(data.isLastTurn)
+    }
+
+    const setPlayerCards = playerDtos => {
+        for (let i = 0; i < playerDtos.length; i++){
+            for (let j = 0; j < players.length; j++){
+                if (playerDtos[i].displayName === players[j].displayName){
+                    players[j].cards = playerDtos[i].cards
+                }
+            }
+        }
     }
 
     const getMyBetOptions = async e => {
@@ -197,7 +237,7 @@ const Main = props => {
     }
 
     return ( 
-        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} showMessage={showMessage} setShowMessage={setShowMessage} gameType={gameType} isLastTurn={isLastTurn} />
+        <Game startGame={startGame} startNewRound={startNewRound} deal={deal} placeBet={placeBet} getMyBetOptions={getMyBetOptions} toggleBetModal={toggleBetModal} isBet={isBet} betOptions={betOptions} id={id} hasStarted={hasStarted} hand={hand} username={username} cards={cards} betLog={betLog} showModal={showModal} errorMessage={errorMessage} players={players} money={money} isMax={isMax} isOver={isOver} endGameMessage={endGameMessage} isMyTurn={isMyTurn} showMessage={showMessage} setShowMessage={setShowMessage} gameType={gameType} isLastTurn={isLastTurn} width={width} />
      );
 }
  

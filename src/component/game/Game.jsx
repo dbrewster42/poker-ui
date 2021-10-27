@@ -55,7 +55,7 @@ const Game = props => {
                             {props.isOver ?
                                 <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>     
                                 :
-                                <MyInfo name={username} money={props.money} hand={hand}  />
+                                <MyInfo name={username} money={props.money} hand={hand} width={props.width}  />
                             }
                             {props.isBet ?
                                 <div className="buttonHolder">

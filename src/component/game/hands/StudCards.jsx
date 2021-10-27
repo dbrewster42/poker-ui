@@ -13,9 +13,9 @@ const StudCards = props => {
                     <div>          
                         <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
                         <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/red_back.png'} alt="card" />
-                        {hand.map(v => {
+                        {hand.map((v, i) => {
                             return (
-                                <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt="card" />
+                                <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} key={i} alt="card" />
                             )
                         })}
 
@@ -29,9 +29,9 @@ const StudCards = props => {
                     <div>
                         <h2 className="pokerHand">{props.pokerHandName}</h2>
 
-                        {hand.map(v => {
+                        {hand.map((v, i) => {
                             return (
-                                <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} alt="card" />
+                                <img className="studCards" src={process.env.PUBLIC_URL + '/pics/PNG/' + v.image} key={i} alt="card" />
                             )
                         })}
                     </div>
