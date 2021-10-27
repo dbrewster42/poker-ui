@@ -9,8 +9,6 @@ const Main = props => {
         console.log("setting username", props.location.state)
         setUsername(props.location.state.username)
     }
-    let [displayName, setDisplayName] = useState("")
-
     const [money, setMoney] = useState(0)
     let [isBet, setIsBet] = useState(false);
     let [betOptions, setBetOptions] = useState();
@@ -38,18 +36,6 @@ const Main = props => {
 
     const startGame = async (state) => {
         console.log("state", state)
-        // let body = { username, 
-        //     displayName : state.displayName,
-        //     numberOfPlayers : state.numberOfPlayers,
-        //     fillWithComputerPlayers: state.fillWithComputerPlayers,
-        //     isCustom: state.isCustom,
-        //     bigBlind: state.bigBlind,
-        //     ante : state.ante,
-        //     buyIn : state.buyIn,
-        //     hasJokers : state.hasJokers,
-        //     gameType : state.gameType
-        //  }
-        // console.log("request", body)
         setGameType(state.gameType);
         setDisplayName(state.displayName);
         try {
@@ -88,10 +74,8 @@ const Main = props => {
         e.preventDefault();
         setIsOver(false)
         setCards([])
-        let body = { username }
         try {
-            console.log("RICCCOOOLAAA", id, body);
-            const data = await Service.getNewRound(id, body);
+            const data = await Service.getNewRound(id, username);
             console.log("response body for RESTART", data.data)
             setVariables(data.data)
         } catch (err){
@@ -106,9 +90,9 @@ const Main = props => {
 
     const deal = async e => {
         e.preventDefault();
-        console.log("dealing")
+        console.log()
         try {
-            const data = await Service.deal(id);
+            const data = await Service.deal(id, username);
             console.log("Dealing", data.data)
             if (data.data.over){
                 let info = data.data.endRoundResponse;
@@ -119,18 +103,14 @@ const Main = props => {
                 console.log("da end playas", info.activePlayers)
                 setPlayers(...[info.activePlayers])
             } else {
-                setCards(data.data.riverCards)
                 setIsBet(true)
                 if (gameType === "SEVEN_CARD_STUD"){
-                    setStudInfo(data.data)
-                    // setIsLastTurn(data.data.isLastTurn)
-                    // // let tempPlayers = data.data.playerDtos;
-                    // // for (let i = 0; i < tempPlayers.length; i++){
-                    // //     if (tempPlayers[i].displayName == )
-                    // // }
-                    // setPlayers(data.data.playerDtos)
+                    setPlayers(data.data.playerDtos);
+                    setIsLastTurn(data.data.isLastTurn)
+                    setHand(data.data.cards)
+                } else {
+                    setCards(data.data.cards)
                 }
-                
             }
         } catch (err){
             console.log(err.response.data.message)
@@ -140,33 +120,6 @@ const Main = props => {
                 setShowModal(false)
             }, (2500))
         }    
-    }
-
-    const setStudInfo = data => {
-        let tempPlayers = data.playerDtos;
-        // if (tempPlayers[tempPlayers.length-1].displayName === displayName){
-        //     setHand(tempPlayers[i].cards)
-        //     tempPlayers.splice(i, 1)
-        // }
-        for (let i = tempPlayers.length-1; i >= 0; i--){
-            if (tempPlayers[i].displayName === displayName){
-                setHand(tempPlayers[i].cards)
-                tempPlayers.splice(i, 1)
-                break
-            }
-        }
-        setPlayers(tempPlayers);
-        setIsLastTurn(data.isLastTurn)
-    }
-
-    const setPlayerCards = playerDtos => {
-        for (let i = 0; i < playerDtos.length; i++){
-            for (let j = 0; j < players.length; j++){
-                if (playerDtos[i].displayName === players[j].displayName){
-                    players[j].cards = playerDtos[i].cards
-                }
-            }
-        }
     }
 
     const getMyBetOptions = async e => {
@@ -208,7 +161,6 @@ const Main = props => {
             betAmount,
             username
         }
-        console.log("Sending bet", body)
         try {
             const data = await Service.bet(id, body);
             setIsMax(false)
@@ -218,7 +170,6 @@ const Main = props => {
             setBetLog(data.data.messages)
             if (data.data.bet){
                 const betOptions = await Service.getBetOptions(id);
-                console.log("isBet", betOptions.data)
                 if (betOptions.data.name === username){
                     setBet(betOptions.data)
                 }
