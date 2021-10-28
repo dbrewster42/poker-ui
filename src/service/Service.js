@@ -25,7 +25,8 @@ class Service {
         return axios.post(`${url}/game/${gameId}/restart`, email, headers)
     }
     deal(gameId, email){
-        return axios.get(`${url}/game/${gameId}`, email, headers)
+        console.log("sending deal")
+        return axios.post(`${url}/game/${gameId}`, email, headers)
     }
     getBetOptions(gameId, username){
         return axios.get(`${url}/game/${gameId}/bet`, username, headers)

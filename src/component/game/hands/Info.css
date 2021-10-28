@@ -35,7 +35,7 @@
 }
 .myStudInfo {
     margin: 1%;
-    width: 50%;
+    width: 60%;
     /* height: 25%; */
     padding: 5px;
     border: 1px dashed black;
@@ -49,7 +49,8 @@
 }
 .cards {
     display: inline-block;
-    width: 50px;
+    width: 42%;
+    /* width: 50px; */
     margin-left: 2%;
 }
 h4 {
@@ -57,8 +58,8 @@ h4 {
     margin: 0%;
 }
 .studCards {
-    display: block;
-    width: 42%;
+    display: inline-block;
+    width: 21%;
     margin-left: 2%;
 }
 .stud {

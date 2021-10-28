@@ -37,7 +37,6 @@ const Main = props => {
     const startGame = async (state) => {
         console.log("state", state)
         setGameType(state.gameType);
-        setDisplayName(state.displayName);
         try {
             const data = await Service.startGame(state);
             console.log("response body", data.data)
@@ -90,7 +89,7 @@ const Main = props => {
 
     const deal = async e => {
         e.preventDefault();
-        console.log()
+        console.log("----------------------", id, username)
         try {
             const data = await Service.deal(id, username);
             console.log("Dealing", data.data)
@@ -113,6 +112,7 @@ const Main = props => {
                 }
             }
         } catch (err){
+            console.log(err)
             console.log(err.response.data.message)
             setErrorMessage(err.response.data.message)
             setShowModal(true)

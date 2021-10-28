@@ -1,11 +1,10 @@
 import "./Game.css"
 import SettingsForm from "./SettingsForm"
-import HoldEm from "./type/HoldEm"
 import Bet from "./extra/Bet"
 import Log from "./extra/Log"
 import Modal from "react-modal";
-import MyInfo from "./hands/MyInfo"
-import SevenStud from "./type/SevenStud"
+import Table from "./Table";
+
 
 
 const Game = props => {
@@ -42,39 +41,7 @@ const Game = props => {
                 </Modal>
 
                 {hasStarted ? 
-                    <div>
-
-                        {props.gameType === "TEXAS_HOLD_EM" ?
-                            <HoldEm players={players} cards={props.cards} isOver={props.isOver} />  
-                            :
-                            <SevenStud players={players} isOver={props.isOver} isLastTurn={props.isLastTurn} />  
-                        }
-                       
-
-                        <div id="buttons">
-                            {props.isOver ?
-                                <button className="start" onClick={(e) => props.startNewRound(e)}>Play New Round</button>     
-                                :
-                                <MyInfo name={username} money={props.money} hand={hand} width={props.width}  />
-                            }
-                            {props.isBet ?
-                                <div className="buttonHolder">
-                                    {props.isMyTurn ?
-                                        <button className="start" onClick={() => props.toggleBetModal(true)}>Make Bet</button>
-                                    :
-                                        <button className="start" onClick={(e) => props.getMyBetOptions(e)}>Get Computer Bets</button>
-                                    }                              
-                                </div>
-                            :
-                                <div className="buttonHolder">
-                                    {!props.isOver &&                    
-                                        <button className="start" onClick={(e) => props.deal(e)}>Deal</button>    
-                                    }  
-                                </div>           
-                            }
-
-                        </div>   
-                    </div>
+                    <Table cards={props.cards} players={props.players} hand={props.hand} username={props.username} isOver={props.isOver} isLastTurn={props.isLastTurn} isMyTurn={props.isMyTurn} isBet={props.isBet} startNewRound={props.startNewRound} deal={props.deal} getMyBetOptions={props.getMyBetOptions} toggleBetModal={props.toggleBetModal} />
                 :
                     <SettingsForm startGame={props.startGame} username={username} />
                 }
